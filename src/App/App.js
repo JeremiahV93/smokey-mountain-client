@@ -9,6 +9,8 @@ import {
 
 import './App.scss';
 
+import userData from '../data/userData';
+
 import Home from '../components/Home/home';
 import LandingPage from '../components/Landingpage/landingpage';
 
@@ -40,7 +42,14 @@ const RoutesContainer = ({ authed, setBackgroundcolor }) => (
 class App extends React.Component {
   state = {
     authed: false,
+    userData: null,
   };
+
+  componentDidMount() {
+    // userData.getUserbyID(1)
+    //   .then((res) => this.setState({ userData: res.data }))
+    //   .catch((err) => console.error(err));
+  }
 
   render() {
     const { authed } = this.state;
