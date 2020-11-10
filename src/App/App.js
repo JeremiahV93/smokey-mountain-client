@@ -11,8 +11,9 @@ import './App.scss';
 
 import userData from '../data/userData';
 
-import Home from '../components/Home/home';
-import LandingPage from '../components/Landingpage/landingpage';
+import Auth from '../components/pages/Auth/Auth';
+import Home from '../components/pages/Home/home';
+import LandingPage from '../components/pages/Landingpage/landingpage';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false
@@ -33,6 +34,7 @@ const RoutesContainer = ({ authed, setBackgroundcolor }) => (
         <PrivateRoute path="/home" component={Home} authed={authed}/>
 
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>
+        <PublicRoute path='/auth' component={Auth} authed={authed} authToggle={authToggle} />
 
         <Redirect from='*' to='/home' />
       </Switch>
@@ -51,15 +53,23 @@ class App extends React.Component {
     //   .catch((err) => console.error(err));
   }
 
+  // authToggle = () => {
+  //   this.setState({ authed: !authed })
+  // }
+
   render() {
     const { authed } = this.state;
+    
+    authToggle = () => {
+      this.setState({ authed: !authed })
+    }
+
     return (
       <div>
         <BrowserRouter>
           <h1>HI TEAM</h1>
-          <RoutesContainer authed={authed} />
+          <RoutesContainer authed={authed} authToggle={authToggle}/>
         </BrowserRouter>
-
       </div>
     );
   }

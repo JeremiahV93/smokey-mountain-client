@@ -10,4 +10,6 @@ const url = 'http://localhost:8088';
 
 const getUserbyID = (id) => axios.get(`${url}/users/${id}`);
 
-export default { getUserbyID };
+const authUserByEmail = (email) => axios.get(`${url}/user?email=${email}`);
+
+export default { getUserbyID, authUserByEmail };
