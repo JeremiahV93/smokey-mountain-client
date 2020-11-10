@@ -51,6 +51,9 @@ class App extends React.Component {
     // userData.getUserbyID(1)
     //   .then((res) => this.setState({ userData: res.data }))
     //   .catch((err) => console.error(err));
+    if (localStorage.getItem('authed') === 'true') {
+      this.setState({ authed: true });
+    }
   }
 
   authToggle = () => {

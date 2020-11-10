@@ -12,6 +12,7 @@ verifyEmail = (e) => {
   userData.authUserByEmail(email)
     .then((res) => {
       if (res.data.success === true) {
+        localStorage.setItem('authed', true);
         this.props.authToggle();
       }
     })
