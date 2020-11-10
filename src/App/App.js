@@ -28,7 +28,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   return <Route {...rest} render={(props) => routeChecker(props)} />;
 };
 
-const RoutesContainer = ({ authed, setBackgroundcolor }) => (
+const RoutesContainer = ({ authed, authToggle }) => (
     <div>
       <Switch>
         <PrivateRoute path="/home" component={Home} authed={authed}/>
@@ -53,22 +53,19 @@ class App extends React.Component {
     //   .catch((err) => console.error(err));
   }
 
-  // authToggle = () => {
-  //   this.setState({ authed: !authed })
-  // }
+  authToggle = () => {
+    const { authed } = this.state;
+    this.setState({ authed: !authed });
+  }
 
   render() {
     const { authed } = this.state;
-    
-    authToggle = () => {
-      this.setState({ authed: !authed })
-    }
 
     return (
       <div>
         <BrowserRouter>
           <h1>HI TEAM</h1>
-          <RoutesContainer authed={authed} authToggle={authToggle}/>
+          <RoutesContainer authed={authed} authToggle={this.authToggle}/>
         </BrowserRouter>
       </div>
     );
