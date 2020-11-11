@@ -18,6 +18,7 @@ import Logout from '../Logout/Logout';
 class TheNavbar extends React.Component {
 static propTypes = {
   authed: PropTypes.bool,
+  authToggle: PropTypes.func,
 }
 
 state = {
@@ -31,27 +32,28 @@ toggle = () => {
 
 render() {
   const { isOpen } = this.state;
-  const { authed } = this.props;
+  const { authed, authToggle } = this.props;
 
   const buildNavbar = () => {
     if (authed) {
       return (
-             <Nav className="mr-auto" navbar>
-                <NavItem>
-                     <NavLink tag={RRNavLink} to='/home'>Home</NavLink>
-                 </NavItem>
-                <NavItem>
-                    <NavLink tag={RRNavLink} to='/articles'>Articles</NavLink>
-                 </NavItem>
-                <NavItem> <NavLink tag={RRNavLink} to='/categories'>Categories</NavLink>
-                </NavItem>
-                <NavItem>
-                 <NavLink tag={RRNavLink} to='/profile'>Profile</NavLink>
-                </NavItem>
-                <NavItem>
-                <Logout/>
-             </NavItem>
-             </Nav>
+        <Nav className="mr-auto" navbar>
+          <NavItem>
+            <NavLink tag={RRNavLink} to='/home'>Home</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} to='/articles'>Articles</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} to='/categories'>Categories</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} to='/profile'>Profile</NavLink>
+          </NavItem>
+          <NavItem>
+            <Logout authToggle={authToggle}/>
+          </NavItem>
+        </Nav>
       );
     }
 
@@ -64,13 +66,14 @@ render() {
     );
   };
   return (
-        <Navbar color="light" light expand="md">
-            <NavbarBrand href="/">Rare</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={isOpen} navbar>
-                {buildNavbar()}
-            </Collapse>
-        </Navbar>
+
+    <Navbar color="light" light expand="md">
+      <NavbarBrand href="/">Rare</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            {buildNavbar()}
+          </Collapse>
+    </Navbar>
   );
 }
 }

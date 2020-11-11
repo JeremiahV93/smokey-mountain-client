@@ -68,7 +68,7 @@ class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
-          <Navbar authed={authed}/>
+          <Navbar authed={authed} authToggle={this.authToggle}/>
           <h1>HI TEAM</h1>
           <RoutesContainer authed={authed} authToggle={this.authToggle}/>
         </BrowserRouter>
