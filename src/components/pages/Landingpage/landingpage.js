@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Landingpage extends React.Component {
   render() {
     return (
             <div>
-                hi this is Landing page
+            <Link to="/Auth">Login</Link>
             </div>
     );
   }

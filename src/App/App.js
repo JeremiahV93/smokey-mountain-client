@@ -11,8 +11,9 @@ import './App.scss';
 
 import userData from '../data/userData';
 
-import Home from '../components/Home/home';
-import LandingPage from '../components/Landingpage/landingpage';
+import Auth from '../components/pages/Auth/Auth';
+import Home from '../components/pages/Home/home';
+import LandingPage from '../components/pages/Landingpage/landingpage';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false
@@ -27,12 +28,13 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   return <Route {...rest} render={(props) => routeChecker(props)} />;
 };
 
-const RoutesContainer = ({ authed, setBackgroundcolor }) => (
+const RoutesContainer = ({ authed, authToggle }) => (
     <div>
       <Switch>
         <PrivateRoute path="/home" component={Home} authed={authed}/>
 
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>
+        <PublicRoute path='/auth' component={Auth} authed={authed} authToggle={authToggle} />
 
         <Redirect from='*' to='/home' />
       </Switch>
@@ -49,17 +51,25 @@ class App extends React.Component {
     // userData.getUserbyID(1)
     //   .then((res) => this.setState({ userData: res.data }))
     //   .catch((err) => console.error(err));
+    if (localStorage.getItem('authed') === 'true') {
+      this.setState({ authed: true });
+    }
+  }
+
+  authToggle = () => {
+    const { authed } = this.state;
+    this.setState({ authed: !authed });
   }
 
   render() {
     const { authed } = this.state;
+
     return (
       <div>
         <BrowserRouter>
           <h1>HI TEAM</h1>
-          <RoutesContainer authed={authed} />
+          <RoutesContainer authed={authed} authToggle={this.authToggle}/>
         </BrowserRouter>
-
       </div>
     );
   }
