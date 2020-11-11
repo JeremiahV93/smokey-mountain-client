@@ -11,6 +11,7 @@ import './App.scss';
 
 import userData from '../data/userData';
 
+import Navbar from '../components/pages/Navbar/Navbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/home';
 import LandingPage from '../components/pages/Landingpage/landingpage';
@@ -67,6 +68,7 @@ class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
+          <Navbar authed={authed}/>
           <h1>HI TEAM</h1>
           <RoutesContainer authed={authed} authToggle={this.authToggle}/>
         </BrowserRouter>
