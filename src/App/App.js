@@ -15,6 +15,7 @@ import Navbar from '../components/pages/Navbar/Navbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/home';
 import LandingPage from '../components/pages/Landingpage/landingpage';
+import Categories from '../components/pages/Categories/Categories';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false
@@ -33,6 +34,7 @@ const RoutesContainer = ({ authed, authToggle }) => (
     <div>
       <Switch>
         <PrivateRoute path="/home" component={Home} authed={authed}/>
+        <PrivateRoute path="/categories" component={Categories} authed={authed}/>
 
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>
         <PublicRoute path='/auth' component={Auth} authed={authed} authToggle={authToggle} />
