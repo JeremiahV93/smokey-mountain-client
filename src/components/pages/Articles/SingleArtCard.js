@@ -8,7 +8,7 @@ class SingleArtCard extends React.Component {
             <h1>{art.title} </h1>
             <h2>{art.name} </h2>
             <h3>{art.category}</h3>
-            <button className='btn btn-success'> Articles </button>
+            <button className='btn btn-success'>Article</button>
         </div>
     );
   }
