@@ -13,6 +13,8 @@ import {
   NavLink,
 } from 'reactstrap';
 
+import Logout from '../Logout/Logout';
+
 class TheNavbar extends React.Component {
 static propTypes = {
   authed: PropTypes.bool,
@@ -47,7 +49,7 @@ render() {
                  <NavLink tag={RRNavLink} to='/profile'>Profile</NavLink>
                 </NavItem>
                 <NavItem>
-                <LogOut/>
+                <Logout/>
              </NavItem>
              </Nav>
       );
