@@ -16,7 +16,8 @@ class Catergories extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const buildCats = categories.map((cat) => <SingleCat cat={cat} key={cat.id} />);
+    const { history } = this.props;
+    const buildCats = categories.map((cat) => <SingleCat cat={cat} history={history} key={cat.id} />);
 
     return (
         <div>
