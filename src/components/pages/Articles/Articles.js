@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import articleData from '../../../data/articleData';
 import SingleArticle from './SingleArtCard';
 
@@ -17,10 +18,13 @@ class Articles extends React.Component {
       const { articles } = this.state;
       const buildArticles = articles.map((art) => <SingleArticle article={art} key={art.id} />);
       return (
-            <div>
+        <div>
+          <div className="container post-buttons">
+            <Link to={'/newarticle'}><i className="fas fa-plus-square"></i> New Article</Link>
+          </div>
              { buildArticles }
              Articles
-            </div>
+          </div>
       );
     }
 }
