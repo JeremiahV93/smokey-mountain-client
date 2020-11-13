@@ -14,4 +14,4 @@ class SingleArticle extends React.Component {
   }
 }
 
-export default SingleArticle
+export default SingleArticle;

@@ -11,6 +11,8 @@ import './App.scss';
 
 import userData from '../data/userData';
 
+import NewArticle from '../components/pages/Articles/NewArticle';
+import Articles from '../components/pages/Articles/Articles';
 import Navbar from '../components/pages/Navbar/Navbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/home';
@@ -35,7 +37,8 @@ const RoutesContainer = ({ authed, authToggle }) => (
       <Switch>
         <PrivateRoute path="/home" component={Home} authed={authed}/>
         <PrivateRoute path="/categories" component={Categories} authed={authed}/>
-
+        <PrivateRoute path="/articles" component={Articles} authed={authed} />
+        <PrivateRoute path="/newarticle" component={NewArticle} authed={authed} />
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>
         <PublicRoute path='/auth' component={Auth} authed={authed} authToggle={authToggle} />
 
