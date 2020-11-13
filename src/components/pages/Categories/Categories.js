@@ -31,7 +31,9 @@ class Catergories extends React.Component {
     const cat = { title };
     const jsonCat = JSON.stringify(cat);
     categoryData.addCategory(jsonCat)
-      .then((res) => console.error(res))
+      .then(() => {
+        this.props.history.push('./home');
+      })
       .catch((err) => console.error(err));
   }
 
