@@ -1,4 +1,5 @@
 import React from 'react';
+import './singleCat.scss';
 
 import catData from '../../../data/categoryData';
 
@@ -17,8 +18,8 @@ class SingleCat extends React.Component {
   render() {
     const { cat } = this.props;
     return (
-        <div className='card'>
-            {cat.title}
+        <div className='card single-cat row justify-content-center'>
+            <h2 className='card-title'>{cat.title}</h2>
             <button className='btn btn-success'> Articles </button>
             <button className='btn btn-warning' onClick={this.deleteCategory}>Delete Category</button>
         </div>

@@ -20,9 +20,11 @@ class Catergories extends React.Component {
     const buildCats = categories.map((cat) => <SingleCat cat={cat} history={history} key={cat.id} />);
 
     return (
-        <div>
-          { buildCats }
-          categories
+        <div className='categories container'>
+          <div className='row'>
+            <h1>Categories</h1>
+          </div>
+            { buildCats }
         </div>
     );
   }
