@@ -13,6 +13,7 @@ verifyEmail = (e) => {
     .then((res) => {
       if (res.data.success === true) {
         localStorage.setItem('authed', true);
+        localStorage.setItem('user_id', res.data.id);
         this.props.authToggle();
       }
     })
