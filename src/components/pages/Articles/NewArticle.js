@@ -36,7 +36,8 @@ class NewArticle extends React.Component {
       creationDate,
       title,
     };
-    articleData.createArticle(newArticle)
+    const jsonArticle = JSON.stringify(newArticle);
+    articleData.createArticle(jsonArticle)
       .then((res) => {
         this.props.history.push(`/articles/${res.data.id}`);
       })
