@@ -15,12 +15,19 @@ class SingleCat extends React.Component {
       .catch((err) => console.error(err));
   }
 
+  update = () => {
+    const { cat } = this.props;
+    this.props.updateCat(cat.title, cat.id);
+  }
+
   render() {
     const { cat } = this.props;
     return (
         <div className='card single-cat row justify-content-center'>
             <h2 className='card-title'>{cat.title}</h2>
             <button className='btn btn-success'> Articles </button>
+            <button className='btn btn-danger' onClick={this.update}> Update </button>
+
             <button className='btn btn-warning' onClick={this.deleteCategory}>Delete Category</button>
         </div>
     );
