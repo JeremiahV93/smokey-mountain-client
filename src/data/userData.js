@@ -12,4 +12,7 @@ const getUserbyID = (id) => axios.get(`${url}/users/${id}`);
 
 const authUserByEmail = (email) => axios.get(`${url}/user?email=${email}`);
 
-export default { getUserbyID, authUserByEmail };
+const addUser = (userobj) => axios.post(`${url}/users`, userobj);
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { getUserbyID, authUserByEmail, addUser };
