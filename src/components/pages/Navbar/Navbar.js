@@ -42,7 +42,7 @@ render() {
             <NavLink tag={RRNavLink} to='/home'>Home</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={RRNavLink} to='/articles/0'>Articles</NavLink>
+            <NavLink tag={RRNavLink} to='/articles'>Articles</NavLink>
           </NavItem>
           <NavItem>
             <NavLink tag={RRNavLink} to='/categories'>Categories</NavLink>
