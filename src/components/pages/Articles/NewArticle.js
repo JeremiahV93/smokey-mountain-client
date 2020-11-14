@@ -28,12 +28,12 @@ class NewArticle extends React.Component {
     const { categoryId, content, title } = this.state;
     const userId = localStorage.getItem('user_id');
     const creationDate = Date.now();
-
+    const creationDateString = creationDate.toString();
     const newArticle = {
-      userId,
-      categoryId,
+      user_id: userId,
+      category_id: categoryId,
       content,
-      creationDate,
+      date: creationDateString,
       title,
     };
     const jsonArticle = JSON.stringify(newArticle);
