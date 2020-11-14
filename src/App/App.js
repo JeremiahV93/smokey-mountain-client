@@ -9,8 +9,6 @@ import {
 
 import './App.scss';
 
-import userData from '../data/userData';
-
 import NewArticle from '../components/pages/Articles/NewArticle';
 import Articles from '../components/pages/Articles/Articles';
 import Navbar from '../components/pages/Navbar/Navbar';
@@ -18,6 +16,7 @@ import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/home';
 import LandingPage from '../components/pages/Landingpage/landingpage';
 import Categories from '../components/pages/Categories/Categories';
+import Profile from '../components/pages/Profile/Profile';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false
@@ -39,6 +38,8 @@ const RoutesContainer = ({ authed, authToggle }) => (
         <PrivateRoute path="/categories" component={Categories} authed={authed}/>
         <PrivateRoute path="/articles/:categoryId" component={Articles} authed={authed} />
         <PrivateRoute path="/newarticle" component={NewArticle} authed={authed} />
+        <PrivateRoute path='/profile' component={Profile} authed={authed} />
+
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>
         <PublicRoute path='/auth' component={Auth} authed={authed} authToggle={authToggle} />
 
@@ -54,9 +55,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    // userData.getUserbyID(1)
-    //   .then((res) => this.setState({ userData: res.data }))
-    //   .catch((err) => console.error(err));
     if (localStorage.getItem('authed') === 'true') {
       this.setState({ authed: true });
     }
