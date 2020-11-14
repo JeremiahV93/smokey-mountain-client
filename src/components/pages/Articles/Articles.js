@@ -22,7 +22,8 @@ class Articles extends React.Component {
 
     render() {
       const { articles } = this.state;
-      const buildArticles = articles.map((art) => <SingleArticle article={art} key={art.id} />);
+      const { history } = this.props;
+      const buildArticles = articles.map((art) => <SingleArticle article={art} history={history} key={art.id} />);
       return (
         <div>
           <div className="container post-buttons">

@@ -4,7 +4,7 @@ const url = 'http://localhost:8088';
 
 const getAllArticles = () => axios.get(`${url}/articles`);
 
-const getArticlesByUserId = (userId) => axios.get(`${url}/articles/${userId}`);
+const getSingleArticlebyId = (articleId) => axios.get(`${url}/articles/${articleId}`);
 
 const getArticlesByCategoryId = (categoryId) => axios.get(`${url}/article_category/${categoryId}`);
 
@@ -16,5 +16,5 @@ const updateArticle = (id, editedArticle) => axios.put(`${url}/articles/${id}`, 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  getArticlesByUserId, deleteArticle, createArticle, updateArticle, getArticlesByCategoryId, getAllArticles,
+  getSingleArticlebyId, deleteArticle, createArticle, updateArticle, getArticlesByCategoryId, getAllArticles,
 };
