@@ -9,7 +9,7 @@ class SingleArtCard extends React.Component {
     console.error(article.id);
     articleData.deleteArticle(article.id)
       .then(() => {
-        this.props.history.push('/articles');
+        this.props.getData();
       })
       .catch((err) => console.error(err));
   }
@@ -30,7 +30,7 @@ class SingleArtCard extends React.Component {
             <h4 className='cart-category'>{article.category}</h4>
             <button onClick={this.articleDetails}>Article Details</button>
             {/* <Link to={`/articles/${article.id}`}><i className="fas fa-plus-square"></i>Article Details</Link> */}
-            <button className='btn btn-warning' onClick={this.deleteArticle}>Delete Category</button>
+            <button className='btn btn-warning' onClick={this.deleteArticle}>Delete Article</button>
         </div>
     );
   }
