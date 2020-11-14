@@ -9,9 +9,15 @@ class Articles extends React.Component {
     }
 
     componentDidMount() {
-      articleData.getAllArticles()
-        .then((res) => this.setState({ articles: res.data }))
-        .catch((err) => console.error(err));
+      if (this.props.match.params.categoryId === '0') {
+        articleData.getAllArticles()
+          .then((res) => this.setState({ articles: res.data }))
+          .catch((err) => console.error(err));
+      } else {
+        articleData.getArticlesByCategoryId(this.props.match.params.categoryId)
+          .then((res) => this.setState({ articles: res.data }))
+          .catch((err) => console.error(err));
+      }
     }
 
     render() {

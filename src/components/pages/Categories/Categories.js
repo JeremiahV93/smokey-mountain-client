@@ -10,8 +10,8 @@ class Catergories extends React.Component {
   state = {
     categories: [],
     isOpen: false,
-    setIsOpen: false,
     title: '',
+    catId: null,
   }
 
   componentDidMount() {
@@ -27,20 +27,35 @@ class Catergories extends React.Component {
 
   submitCategory = (e) => {
     e.preventDefault();
-    const { title } = this.state;
+    const { title, updating, catId } = this.state;
     const cat = { title };
     const jsonCat = JSON.stringify(cat);
-    categoryData.addCategory(jsonCat)
-      .then(() => {
-        this.props.history.push('./home');
-      })
-      .catch((err) => console.error(err));
+
+    if (updating) {
+      categoryData.updateCategory(jsonCat, catId)
+        .then(() => {
+          this.props.history.push('./home');
+        })
+        .catch((err) => console.error(err));
+    } else {
+      categoryData.addCategory(jsonCat)
+        .then(() => {
+          this.props.history.push('./home');
+        })
+        .catch((err) => console.error(err));
+    }
+  }
+
+  updateCat = (title, catId) => {
+    this.setState({
+      title, catId, isOpen: true, updating: true,
+    });
   }
 
   render() {
-    const { categories, isOpen } = this.state;
+    const { categories, isOpen, title } = this.state;
     const { history } = this.props;
-    const buildCats = categories.map((cat) => <SingleCat cat={cat} history={history} key={cat.id} />);
+    const buildCats = categories.map((cat) => <SingleCat cat={cat} updateCat={this.updateCat} history={history} key={cat.id} />);
 
     const toggle = () => this.setState({ isOpen: !isOpen });
 
@@ -57,7 +72,7 @@ class Catergories extends React.Component {
                 <form>
                     <div className="form-group">
                       <label htmlFor="categoryName">Category Name:</label>
-                      <input type="categoryName" onChange={this.categoryUpdate} className="form-control" aria-describedby="emailHelp" />
+                      <input type="categoryName" onChange={this.categoryUpdate} className="form-control" aria-describedby="emailHelp" value={title} />
                     </div>
                     <button onClick={this.submitCategory} className="btn btn-primary">Submit</button>
                   </form>
