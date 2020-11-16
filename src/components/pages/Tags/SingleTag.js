@@ -14,8 +14,19 @@ class SingleTag extends React.Component {
       .catch((err) => console.error(err));
   }
 
+  update = () => {
+    const { tag } = this.props;
+    this.props.updateTag(tag.title, tag.id);
+  }
+
+  link = (e) => {
+    e.preventDefault();
+    const { tag } = this.props;
+    this.props.history.push(`/articles/${tag.id}`);
+  }
+
   render() {
-    const { cat } = this.props;
+    const { tag } = this.props;
     return (
       <div className='card single-tag row justify-content-center'>
         <h2 className='card-title'>{tag.title}</h2>

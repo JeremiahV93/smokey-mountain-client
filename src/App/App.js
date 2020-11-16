@@ -18,7 +18,7 @@ import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/home';
 import LandingPage from '../components/pages/Landingpage/landingpage';
 import Categories from '../components/pages/Categories/Categories';
-import Tags from '..//components/pages/Tags/Tags';
+import Tags from '../components/pages/Tags/Tags';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false
