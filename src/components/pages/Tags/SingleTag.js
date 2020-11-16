@@ -31,7 +31,7 @@ class SingleTag extends React.Component {
       <div className='card single-tag row justify-content-center'>
         <h2 className='card-title'>{tag.title}</h2>
         <button className='btn btn-danger' onClick={this.update}> Update </button>
-        <button className='btn btn-warning' onClick={this.deleteCategory}>Delete Category</button>
+        <button className='btn btn-warning' onClick={this.deleteTag}>Delete Tag</button>
       </div>
     );
   }
