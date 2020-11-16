@@ -9,8 +9,8 @@ import {
 
 import './App.scss';
 
-import userData from '../data/userData';
-
+import SingleArticle from '../components/pages/Articles/SingleArticle';
+import EditArticle from '../components/pages/Articles/EditArticle';
 import NewArticle from '../components/pages/Articles/NewArticle';
 import Articles from '../components/pages/Articles/Articles';
 import Navbar from '../components/pages/Navbar/Navbar';
@@ -19,6 +19,7 @@ import Home from '../components/pages/Home/home';
 import LandingPage from '../components/pages/Landingpage/landingpage';
 import Categories from '../components/pages/Categories/Categories';
 import Tags from '../components/pages/Tags/Tags';
+import Profile from '../components/pages/Profile/Profile';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false
@@ -39,8 +40,13 @@ const RoutesContainer = ({ authed, authToggle }) => (
         <PrivateRoute path="/home" component={Home} authed={authed}/>
         <PrivateRoute path="/categories" component={Categories} authed={authed}/>
         <PrivateRoute path="/tags" component={Tags} authed={authed} />
+        <PrivateRoute exact path="/articles" component={Articles} authed={authed} />
+        <PrivateRoute path="/articles/:articleId" component={SingleArticle} authed={authed}/>
         <PrivateRoute path="/articles/:categoryId" component={Articles} authed={authed} />
         <PrivateRoute path="/newarticle" component={NewArticle} authed={authed} />
+        <PrivateRoute path='/profile' component={Profile} authed={authed} />
+
+        <PrivateRoute path="/editarticles/:articleId" component={EditArticle} authed={authed} />
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>
         <PublicRoute path='/auth' component={Auth} authed={authed} authToggle={authToggle} />
 
@@ -56,9 +62,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    // userData.getUserbyID(1)
-    //   .then((res) => this.setState({ userData: res.data }))
-    //   .catch((err) => console.error(err));
     if (localStorage.getItem('authed') === 'true') {
       this.setState({ authed: true });
     }

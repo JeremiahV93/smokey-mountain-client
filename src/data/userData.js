@@ -14,5 +14,9 @@ const authUserByEmail = (email) => axios.get(`${url}/user?email=${email}`);
 
 const addUser = (userobj) => axios.post(`${url}/users`, userobj);
 
+const updateUser = (id, userObj) => axios.put(`${url}/users/${id}`, userObj);
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getUserbyID, authUserByEmail, addUser };
+export default {
+  getUserbyID, authUserByEmail, addUser, updateUser,
+};

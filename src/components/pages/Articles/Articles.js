@@ -9,7 +9,11 @@ class Articles extends React.Component {
     }
 
     componentDidMount() {
-      if (this.props.match.params.categoryId === '0') {
+      this.getData();
+    }
+
+    getData = () => {
+      if (Object.entries(this.props.match.params).length === 0) {
         articleData.getAllArticles()
           .then((res) => this.setState({ articles: res.data }))
           .catch((err) => console.error(err));
@@ -22,7 +26,8 @@ class Articles extends React.Component {
 
     render() {
       const { articles } = this.state;
-      const buildArticles = articles.map((art) => <SingleArticle article={art} key={art.id} />);
+      const { history } = this.props;
+      const buildArticles = articles.map((art) => <SingleArticle article={art} getData={this.getData} history={history} key={art.id} />);
       return (
         <div>
           <div className="container post-buttons">
