@@ -18,7 +18,7 @@ class SingleArticle extends React.Component {
   render() {
     const { article } = this.state;
     return (
-      <div className="singleArticle card mb-d rounded mx-auto" id="singleArticleCard">
+      <div className="card row" id="singleArticleCard">
         <h2 className='card-title text-center'id="cardTitle">{article.title} </h2>
         <h3 className='card-name'>{article.user.display_name} </h3>
         <h4 className='card-content'>{article.content}</h4>
