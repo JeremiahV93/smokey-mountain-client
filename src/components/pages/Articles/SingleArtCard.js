@@ -1,6 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import articleData from '../../../data/articleData';
+import './SingleArtCard.scss';
 
 class SingleArtCard extends React.Component {
   deleteArticle = (e) => {
@@ -24,13 +25,14 @@ class SingleArtCard extends React.Component {
   render() {
     const { article } = this.props;
     return (
-        <div className='card single-art row justify-content-center'>
-            <h2 className='card-title'>{article.title} </h2>
-            <h3 className='card-name'>{article.user.display_name} </h3>
+        <div className='card single-art row justify-content-center' id="articleCard">
+            <h2 className='card-title text-center'>{article.title} </h2>
+            <h3 className='card-name text-center'>By: {article.user.display_name} </h3>
             <h4 className='cart-category'>{article.category}</h4>
-            <button onClick={this.articleDetails}>Article Details</button>
-            {/* <Link to={`/articles/${article.id}`}><i className="fas fa-plus-square"></i>Article Details</Link> */}
+          <div className="card-footer text-center">
+            <button className='btn btn-primary' onClick={this.articleDetails}>Article Details</button>
             <button className='btn btn-warning' onClick={this.deleteArticle}>Delete Article</button>
+          </div>
         </div>
     );
   }
