@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import articleData from '../../../data/articleData';
 import SingleArticle from './SingleArtCard';
+import './Articles.scss';
 
 class Articles extends React.Component {
     state = {
@@ -29,12 +30,12 @@ class Articles extends React.Component {
       const { history } = this.props;
       const buildArticles = articles.map((art) => <SingleArticle article={art} getData={this.getData} history={history} key={art.id} />);
       return (
-        <div>
+        <div className="post-container">
+          <h1 className="text-center">View All Articles</h1>
           <div className="container post-buttons">
-            <Link to={'/newarticle'}><i className="fas fa-plus-square"></i> New Article</Link>
+            <Link className="btn btn-secondary" to={'/newarticle'}><i className="fas fa-plus-square"></i> New Article</Link>
           </div>
              { buildArticles }
-             Articles
           </div>
       );
     }

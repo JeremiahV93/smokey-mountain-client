@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import articleData from '../../../data/articleData';
+import './SingleArticle.scss';
 
 class SingleArticle extends React.Component {
   state = {
@@ -17,12 +18,11 @@ class SingleArticle extends React.Component {
   render() {
     const { article } = this.state;
     return (
-      <div className="singleArticle">
-        <h2 className='card-title'>{article.title} </h2>
+      <div className="card row" id="singleArticleCard">
+        <h2 className='card-title text-center'id="cardTitle">{article.title} </h2>
         <h3 className='card-name'>{article.user.display_name} </h3>
         <h4 className='card-content'>{article.content}</h4>
-        <Link to={`/editarticles/${article.id}`}><i className="fas fa-plus-square"></i>Edit Articles</Link>
-
+        <Link className="btn btn-secondary" to={`/editarticles/${article.id}`}><i className="fas fa-plus-square"></i>Edit Articles</Link>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import articleData from '../../../data/articleData';
+import './NewArticle.scss';
 
 class NewArticle extends React.Component {
   state = {
