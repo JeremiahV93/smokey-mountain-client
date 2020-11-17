@@ -16,7 +16,7 @@ class Tags extends React.Component {
 
   componentDidMount() {
     tagData.getAllTags()
-      .then((res) => this.setState({ categories: res.data }))
+      .then((res) => this.setState({ tags: res.data }))
       .catch((err) => console.error(err));
   }
 
@@ -47,7 +47,7 @@ class Tags extends React.Component {
   render() {
     const { tags, isOpen } = this.state;
     const { history } = this.props;
-    const buildTags = tags.map((tag) => <SingleTag tag={tag} updateTag={this.updateTag} history={history} key={tag.id} />);
+    // const buildTags = tags.map((tag) => <SingleTag tag={tag} updateTag={this.updateTag} history={history} key={tag.id} />);
 
     const toggle = () => this.setState({ isOpen: !isOpen });
 
@@ -72,7 +72,7 @@ class Tags extends React.Component {
               </Card>
             </Collapse>
         </div>
-          { buildTags }
+          {/* { buildTags } */}
       </div>
     );
   }

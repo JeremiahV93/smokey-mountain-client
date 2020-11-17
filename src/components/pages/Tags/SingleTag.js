@@ -22,7 +22,7 @@ class SingleTag extends React.Component {
   link = (e) => {
     e.preventDefault();
     const { tag } = this.props;
-    this.props.history.push(`/articles/${tag.id}`);
+    this.props.history.push(`/tags/${tag.id}`);
   }
 
   render() {
