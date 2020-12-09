@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import userData from '../../../data/userData';
 
 class Auth extends React.Component {
@@ -6,10 +7,11 @@ state = {
   email: '',
   firstName: '',
   lastName: '',
-  displayName: '',
   date: Date.now(),
   username: '',
   password: '',
+  bio: '',
+  profileImageUrl: '',
 }
 
 verifyEmail = (e) => {
@@ -34,22 +36,35 @@ verifyEmail = (e) => {
 createAccount = (e) => {
   e.preventDefault();
   const {
-    email, firstName, lastName, displayName, date,
+    email, firstName, lastName, username, password, profileImageUrl, bio,
   } = this.state;
+
+  let { date } = this.state;
+
+  date = moment(date).format('YYYY-MM-DD');
 
   const newUser = {
     first_name: firstName,
     last_name: lastName,
     email,
-    display_name: displayName,
-    date,
+    username,
+    created_on: date,
+    password,
+    bio,
+    profile_image_url: profileImageUrl,
+
   };
   const jsonUser = JSON.stringify(newUser);
+
   userData.addUser(jsonUser)
     .then((res) => {
-      localStorage.setItem('authed', true);
-      localStorage.setItem('user_id', res.data.id);
-      this.props.authToggle();
+      if (res.data.valid) {
+        localStorage.setItem('authed', true);
+        localStorage.setItem('token', res.data.token);
+        this.props.authToggle();
+      } else {
+        console.error('you suck, remember your password or username');
+      }
     })
     .catch((err) => console.error(err));
 }
@@ -57,6 +72,11 @@ createAccount = (e) => {
 usernameChange = (e) => {
   e.preventDefault();
   this.setState({ username: e.target.value });
+}
+
+emailChange = (e) => {
+  e.preventDefault();
+  this.setState({ email: e.target.value });
 }
 
 passwordChange = (e) => {
@@ -74,9 +94,19 @@ lastNameChange = (e) => {
   this.setState({ lastName: e.target.value });
 }
 
-displayNameChange = (e) => {
+usernameChange = (e) => {
   e.preventDefault();
-  this.setState({ displayName: e.target.value });
+  this.setState({ username: e.target.value });
+}
+
+bioChange = (e) => {
+  e.preventDefault();
+  this.setState({ bio: e.target.value });
+}
+
+imageUrlChange = (e) => {
+  e.preventDefault();
+  this.setState({ profileImageUrl: e.target.value });
 }
 
 render() {
@@ -94,6 +124,7 @@ render() {
         </div>
         <button type="submit" className="btn btn-primary" onClick={this.verifyEmail}>Login</button>
       </form>
+
     <h1>New Users</h1>
       <form className='col-6 offset-3 '>
         <div className="form-group">
@@ -109,8 +140,20 @@ render() {
           <input type="text" onChange={this.lastNameChange} className="form-control" id="Last Name" placeholder="Last Name" />
         </div>
         <div className="form-group">
-          <label htmlFor="Display Name">Display Name</label>
-          <input type="text" onChange={this.displayNameChange} className="form-control" id="Display Name" placeholder="Display Name" />
+          <label htmlFor="username">Username</label>
+          <input type="text" onChange={this.usernameChange} className="form-control" id="usernamee" placeholder="username" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="Password">Password</label>
+          <input type="text" onChange={this.passwordChange} className="form-control" id="Password" placeholder="Password" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="bio">Bio</label>
+          <input type="text" onChange={this.bioChange} className="form-control" id="bio" placeholder="Add some information to share with other users :)" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profile_image_url">Profile Pic URL</label>
+          <input type="text" onChange={this.imageUrlChange} className="form-control" id="profile_image_url" placeholder="url" />
         </div>
         <button type="submit" className="btn btn-primary" onClick={this.createAccount}>Create Account</button>
       </form>
