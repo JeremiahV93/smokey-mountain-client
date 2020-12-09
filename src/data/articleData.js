@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:8088';
+const url = 'http://localhost:3000';
 
 const getAllArticles = () => axios.get(`${url}/articles`);
 
