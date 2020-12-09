@@ -19,7 +19,15 @@ verifyEmail = (e) => {
   user = JSON.stringify(user);
 
   userData.authUser(user)
-    .then((res) => console.error(res))
+    .then((res) => {
+      if (res) {
+        console.error(res);
+        localStorage.setItem('authed', true);
+        localStorage.setItem('token', res.data.token);
+
+        this.props.authToggle();
+      }
+    })
     .catch((err) => console.error(err));
 }
 
