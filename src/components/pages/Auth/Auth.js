@@ -8,16 +8,23 @@ state = {
   lastName: '',
   displayName: '',
   date: Date.now(),
+  username: '',
+  password: '',
 }
 
 verifyEmail = (e) => {
   e.preventDefault();
-  const { email } = this.state;
-  userData.authUserByEmail(email)
+  const { username, password } = this.state;
+  let user = { username, password };
+  user = JSON.stringify(user);
+
+  userData.authUser(user)
     .then((res) => {
-      if (res.data.success === true) {
+      if (res) {
+        console.error(res);
         localStorage.setItem('authed', true);
-        localStorage.setItem('user_id', res.data.id);
+        localStorage.setItem('token', res.data.token);
+
         this.props.authToggle();
       }
     })
@@ -47,9 +54,14 @@ createAccount = (e) => {
     .catch((err) => console.error(err));
 }
 
-emailChange = (e) => {
+usernameChange = (e) => {
   e.preventDefault();
-  this.setState({ email: e.target.value });
+  this.setState({ username: e.target.value });
+}
+
+passwordChange = (e) => {
+  e.preventDefault();
+  this.setState({ password: e.target.value });
 }
 
 firstNameChange = (e) => {
@@ -73,8 +85,12 @@ render() {
       <h1>Current Users</h1>
       <form className='col-6 offset-3'>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input type="text" onChange={this.emailChange} className="form-control" id="email" placeholder="please submit your email" />
+          <label htmlFor="username">Username</label>
+          <input type="text" onChange={this.usernameChange} className="form-control" id="username" placeholder="please submit your username" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input type="text" onChange={this.passwordChange} className="form-control" id="password" placeholder="please submit your password" />
         </div>
         <button type="submit" className="btn btn-primary" onClick={this.verifyEmail}>Login</button>
       </form>

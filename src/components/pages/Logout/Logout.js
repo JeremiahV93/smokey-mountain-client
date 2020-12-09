@@ -4,6 +4,9 @@ class Logout extends React.Component {
   logoutFunc = (e) => {
     e.preventDefault();
     localStorage.removeItem('authed');
+    localStorage.removeItem('token');
+    localStorage.removeItem('lu_token');
+
     this.props.authToggle();
   };
 
