@@ -58,12 +58,12 @@ createAccount = (e) => {
 
   userData.addUser(jsonUser)
     .then((res) => {
-      if (res.data.valid) {
+      if (res.data.valid === true) {
         localStorage.setItem('authed', true);
         localStorage.setItem('token', res.data.token);
         this.props.authToggle();
       } else {
-        console.error('you suck, remember your password or username');
+        console.error('incorrecct password and/or username');
       }
     })
     .catch((err) => console.error(err));
