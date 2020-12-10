@@ -22,7 +22,7 @@ const getUserbyID = (id) => axios.get(`${url}/users/${id}`);
 
 const authUser = (usernamePassword) => axios.post(`${url}/login`, usernamePassword);
 
-const addUser = (userobj) => axios.post(`${url}/users`, userobj);
+const addUser = (userobj) => axios.post(`${url}/register`, userobj);
 
 const updateUser = (id, userObj) => axios.put(`${url}/users/${id}`, userObj);
 
