@@ -27,8 +27,8 @@ class SingleArtCard extends React.Component {
     return (
         <div className='card single-art row justify-content-center' id="articleCard">
             <h2 className='card-title text-center'>{article.title} </h2>
-            <h3 className='card-name text-center'>By: {article.user.display_name} </h3>
-            <h4 className='cart-category'>{article.category}</h4>
+            <h3 className='card-name text-center'>By: TBD </h3>
+            <h4 className='cart-category'>Category TBD</h4>
           <div className="card-footer text-center">
             <button className='btn btn-primary' onClick={this.articleDetails}>Article Details</button>
             <button className='btn btn-warning' onClick={this.deleteArticle}>Delete Article</button>
