@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-const url = 'http://localhost:8088';
+const url = 'http://localhost:8000';
 
-const getAllTags = () => axios.get(`${url}/tags`);
+const headers = {
+  headers: {
+    Authorization: `Token ${localStorage.getItem('token')}`,
+  },
+};
+
+const getAllTags = () => axios.get(`${url}/tags`, headers);
 
 const getTagsById = (id) => axios.get(`${url}/tags/${id}`);
 
