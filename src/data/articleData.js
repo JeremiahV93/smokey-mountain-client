@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:8000';
 
-const getAllArticles = () => axios.get(`${url}/articles`);
+const headers = {
+  headers: {
+    Authorization: `Token ${localStorage.getItem('token')}`,
+  },
+};
+
+const getAllArticles = () => axios.get(`${url}/posts`, headers);
 
 const getSingleArticlebyId = (articleId) => axios.get(`${url}/articles/${articleId}`);
 
