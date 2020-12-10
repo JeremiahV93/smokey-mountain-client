@@ -14,7 +14,7 @@ const getSingleArticlebyId = (articleId) => axios.get(`${url}/articles/${article
 
 const getArticlesByCategoryId = (categoryId) => axios.get(`${url}/article_category/${categoryId}`);
 
-const deleteArticle = (id) => axios.delete(`${url}/articles/${id}`);
+const deleteArticle = (id) => axios.delete(`${url}/posts/${id}`, headers);
 
 const createArticle = (newArticle) => axios.post(`${url}/articles`, newArticle);
 
