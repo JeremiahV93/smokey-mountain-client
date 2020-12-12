@@ -8,13 +8,20 @@ const headers = {
   },
 };
 
+const createHeaders = {
+  headers: {
+    Authorization: `Token ${localStorage.getItem('token')}`,
+    'Content-Type': 'application/json',
+  },
+};
+
 const getAllTags = () => axios.get(`${url}/tags`, headers);
 
 const getTagsById = (id) => axios.get(`${url}/tags/${id}`);
 
 const deleteTag = (id) => axios.delete(`${url}/tags/${id}`);
 
-const createTag = (newTag) => axios.post(`${url}/tags`, newTag);
+const createTag = (newTag) => axios.post(`${url}/tags`, newTag, createHeaders);
 
 const updateTag = (id, editedTag) => axios.put(`${url}/tags/${id}`, editedTag);
 

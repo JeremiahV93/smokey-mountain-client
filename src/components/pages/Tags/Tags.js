@@ -10,7 +10,7 @@ class Tags extends React.Component {
   state = {
     tags: [],
     isOpen: false,
-    title: '',
+    label: '',
     tagId: null,
   }
 
@@ -20,29 +20,33 @@ class Tags extends React.Component {
       .catch((err) => console.error(err));
   }
 
-  tagUpdate = (e) => {
+  changeLabelEvent = (e) => {
     e.preventDefault();
-    this.setState({ title: e.target.value });
+    this.setState({ label: e.target.value });
   }
 
-  submitTag = (e) => {
+  addTag = (e) => {
     e.preventDefault();
-    const { title } = this.state;
-    const tag = { title };
-    const jsonTag = JSON.stringify(tag);
+    const { label } = this.state;
+    const tagId = localStorage.getItem('id');
+    const newTag = {
+      id: tagId,
+      label,
+    };
+    const jsonTag = JSON.stringify(newTag);
 
-    tagData.submitTag(jsonTag)
+    tagData.createTag(jsonTag)
       .then(() => {
-        this.props.history.push('./home');
+        this.props.history.push('./tags');
       })
       .catch((err) => console.error(err));
   }
 
-  updateTag = (title) => {
-    this.setState({
-      title, isOpen: true, updating: true,
-    });
-  }
+  // updateTag = () => {
+  //   this.setState({
+  //     title, isOpen: true, updating: true,
+  //   });
+  // }
 
   render() {
     const { tags, isOpen } = this.state;
@@ -64,9 +68,9 @@ class Tags extends React.Component {
                 <form>
                     <div className="form-group">
                       <label htmlFor="tagName">Tag Name:</label>
-                      <input type="tagName" onChange={this.tagUpdate} className="form-control" aria-describedby="emailHelp" />
+                      <input type="tagName" onChange={this.changeLabelEvent} className="form-control" aria-describedby="emailHelp" />
                     </div>
-                    <button onClick={this.updateTag} className="btn btn-primary">Submit</button>
+                    <button onClick={this.addTag} className="btn btn-primary">Submit</button>
                   </form>
                 </CardBody>
               </Card>
