@@ -16,7 +16,7 @@ class Tags extends React.Component {
 
   componentDidMount() {
     tagData.getAllTags()
-      .then((res) => this.setState({ categories: res.data }))
+      .then((res) => this.setState({ tags: res.data }))
       .catch((err) => console.error(err));
   }
 
