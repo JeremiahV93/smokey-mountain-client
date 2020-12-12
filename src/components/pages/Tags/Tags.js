@@ -14,44 +14,54 @@ class Tags extends React.Component {
     tagId: null,
   }
 
-  componentDidMount() {
+  getTagData = () => {
     tagData.getAllTags()
       .then((res) => this.setState({ tags: res.data }))
       .catch((err) => console.error(err));
   }
 
-  changeLabelEvent = (e) => {
+  componentDidMount() {
+    this.getTagData();
+  }
+
+  tagUpdate = (e) => {
     e.preventDefault();
     this.setState({ label: e.target.value });
   }
 
-  addTag = (e) => {
+  submitTag = (e) => {
     e.preventDefault();
-    const { label } = this.state;
-    const tagId = localStorage.getItem('id');
-    const newTag = {
-      id: tagId,
-      label,
-    };
-    const jsonTag = JSON.stringify(newTag);
+    const { label, updating, tagId } = this.state;
+    const tag = { label };
+    const jsonTag = JSON.stringify(tag);
 
-    tagData.createTag(jsonTag)
-      .then(() => {
-        this.props.history.push('./tags');
-      })
-      .catch((err) => console.error(err));
+    if (updating) {
+      tagData.updateTag(jsonTag, tagId)
+        .then(() => {
+          this.setState({ isOpen: false, label: '' });
+          this.getTagData();
+        })
+        .catch((err) => console.error(err));
+    } else {
+      tagData.createTag(jsonTag)
+        .then(() => {
+          this.setState({ isOpen: false, label: '' });
+          this.getTagData();
+        })
+        .catch((err) => console.error(err));
+    }
   }
 
-  // updateTag = () => {
-  //   this.setState({
-  //     title, isOpen: true, updating: true,
-  //   });
-  // }
+  updateThisTag = (label, tagId) => {
+    this.setState({
+      label, tagId, isOpen: true, updating: true,
+    });
+  }
 
   render() {
     const { tags, isOpen } = this.state;
     const { history } = this.props;
-    const buildTags = tags.map((tag) => <SingleTag tag={tag} updateTag={this.updateTag} history={history} key={tag.id} />);
+    const buildTags = tags.map((tag) => <SingleTag tag={tag} updateThisTag={this.updateThisTag} history={history} key={tag.id} />);
 
     const toggle = () => this.setState({ isOpen: !isOpen });
 
@@ -68,9 +78,9 @@ class Tags extends React.Component {
                 <form>
                     <div className="form-group">
                       <label htmlFor="tagName">Tag Name:</label>
-                      <input type="tagName" onChange={this.changeLabelEvent} className="form-control" aria-describedby="emailHelp" />
+                      <input type="tagName" onChange={this.tagUpdate} className="form-control" aria-describedby="emailHelp" />
                     </div>
-                    <button onClick={this.addTag} className="btn btn-primary">Submit</button>
+                    <button onClick={this.submitTag} className="btn btn-primary">Submit</button>
                   </form>
                 </CardBody>
               </Card>
