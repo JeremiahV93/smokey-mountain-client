@@ -8,11 +8,18 @@ const headers = {
   },
 };
 
+const createHeaders = {
+  headers: {
+    Authorization: `Token ${localStorage.getItem('token')}`,
+    'Content-Type': 'application/json',
+  },
+};
+
 const getAllCats = () => axios.get(`${url}/categories`, headers);
 
 const deleteCat = (id) => axios.delete(`${url}/categories/${id}`);
 
-const addCategory = (obj) => axios.post(`${url}/categories`, obj);
+const addCategory = (obj) => axios.post(`${url}/categories`, obj, createHeaders);
 
 const updateCategory = (obj, id) => axios.put(`${url}/categories/${id}`, obj);
 
