@@ -57,12 +57,13 @@ class NewArticle extends React.Component {
     const jsonArticle = JSON.stringify(newArticle);
     articleData.createArticle(jsonArticle)
       .then((res) => {
-        this.props.history.push(`/articles/${res.data.id}`);
+        this.props.history.push('/articles');
       })
       .catch((err) => console.error('create article broke', err));
   };
 
   render() {
+    const { cats } = this.state;
     return (
      <div className="form-wrapper">
       <h1 className="text-center mt-3">Create New Article</h1>
@@ -77,7 +78,10 @@ class NewArticle extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="categoryId">Category ID</label>
-          <input type="text" className="form-control" id="categoryId" placeholder="categoryId" onChange={this.changeCategoryEvent}/>
+          <select className="form-control" id="categoryId" placeholder="categoryId" onChange={this.changeCategoryEvent}>
+            <option>Please select a category</option>
+            {cats.map((cat) => <option value={cat.id}> {cat.label}</option>)}
+          </ select>
         </div>
         <div className="form-group">
           <label htmlFor="content">Content</label>
