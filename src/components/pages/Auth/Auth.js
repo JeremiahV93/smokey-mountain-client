@@ -23,9 +23,9 @@ verifyEmail = (e) => {
   userData.authUser(user)
     .then((res) => {
       if (res) {
-        console.error(res);
         localStorage.setItem('authed', true);
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('user_id', res.data.user_id);
 
         this.props.authToggle();
       }
@@ -61,6 +61,7 @@ createAccount = (e) => {
       if (res.data.valid === true) {
         localStorage.setItem('authed', true);
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('user_id', res.data.user_id);
         this.props.authToggle();
       } else {
         console.error('incorrecct password and/or username');
