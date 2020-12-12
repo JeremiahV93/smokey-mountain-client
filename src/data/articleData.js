@@ -8,6 +8,13 @@ const headers = {
   },
 };
 
+const createHeaders = {
+  headers: {
+    Authorization: `Token ${localStorage.getItem('token')}`,
+    'Content-Type': 'application/json',
+  },
+};
+
 const getAllArticles = () => axios.get(`${url}/posts`, headers);
 
 const getSingleArticlebyId = (articleId) => axios.get(`${url}/articles/${articleId}`);
@@ -16,7 +23,7 @@ const getArticlesByCategoryId = (categoryId) => axios.get(`${url}/article_catego
 
 const deleteArticle = (id) => axios.delete(`${url}/posts/${id}`, headers);
 
-const createArticle = (newArticle) => axios.post(`${url}/articles`, newArticle);
+const createArticle = (newArticle) => axios.post(`${url}/posts`, newArticle, createHeaders);
 
 const updateArticle = (id, editedArticle) => axios.put(`${url}/articles/${id}`, editedArticle);
 
