@@ -10,50 +10,56 @@ class Catergories extends React.Component {
   state = {
     categories: [],
     isOpen: false,
-    title: '',
+    label: '',
     catId: null,
   }
 
-  componentDidMount() {
-    categoryData.getAllCats()
-      .then((res) => this.setState({ categories: res.data }))
-      .catch((err) => console.error(err));
-  }
+ getCatData = () => {
+   categoryData.getAllCats()
+     .then((res) => this.setState({ categories: res.data }))
+     .catch((err) => console.error(err));
+ }
+
+ componentDidMount() {
+   this.getCatData();
+ }
 
   categoryUpdate = (e) => {
     e.preventDefault();
-    this.setState({ title: e.target.value });
+    this.setState({ label: e.target.value });
   }
 
   submitCategory = (e) => {
     e.preventDefault();
-    const { title, updating, catId } = this.state;
-    const cat = { title };
+    const { label, updating, catId } = this.state;
+    const cat = { label };
     const jsonCat = JSON.stringify(cat);
 
     if (updating) {
       categoryData.updateCategory(jsonCat, catId)
         .then(() => {
-          this.props.history.push('./home');
+          this.setState({ isOpen: false, label: '' });
+          this.getCatData();
         })
         .catch((err) => console.error(err));
     } else {
       categoryData.addCategory(jsonCat)
         .then(() => {
-          this.props.history.push('./home');
+          this.setState({ isOpen: false, label: '' });
+          this.getCatData();
         })
         .catch((err) => console.error(err));
     }
   }
 
-  updateCat = (title, catId) => {
+  updateCat = (label, catId) => {
     this.setState({
-      title, catId, isOpen: true, updating: true,
+      label, catId, isOpen: true, updating: true,
     });
   }
 
   render() {
-    const { categories, isOpen, title } = this.state;
+    const { categories, isOpen, label } = this.state;
     const { history } = this.props;
     const buildCats = categories.map((cat) => <SingleCat cat={cat} updateCat={this.updateCat} history={history} key={cat.id} />);
 
@@ -72,7 +78,7 @@ class Catergories extends React.Component {
                 <form>
                     <div className="form-group">
                       <label htmlFor="categoryName">Category Name:</label>
-                      <input type="categoryName" onChange={this.categoryUpdate} className="form-control" aria-describedby="emailHelp" value={title} />
+                      <input type="categoryName" onChange={this.categoryUpdate} className="form-control" aria-describedby="emailHelp" value={label} />
                     </div>
                     <button onClick={this.submitCategory} className="btn btn-primary">Submit</button>
                   </form>
