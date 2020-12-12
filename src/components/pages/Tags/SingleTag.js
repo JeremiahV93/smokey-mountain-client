@@ -29,7 +29,7 @@ class SingleTag extends React.Component {
     const { tag } = this.props;
     return (
       <div className='card single-tag row justify-content-center'>
-        <h2 className='card-title'>{tag.title}</h2>
+        <h2 className='card-title'>{tag.label}</h2>
         <button className='btn btn-danger' onClick={this.update}> Update </button>
         <button className='btn btn-warning' onClick={this.deleteTag}>Delete Tag</button>
       </div>
