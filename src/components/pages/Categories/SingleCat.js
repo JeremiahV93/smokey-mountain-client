@@ -16,7 +16,7 @@ class SingleCat extends React.Component {
 
   update = () => {
     const { cat } = this.props;
-    this.props.updateCat(cat.title, cat.id);
+    this.props.updateCat(cat.label, cat.id);
   }
 
   link = (e) => {
@@ -29,7 +29,7 @@ class SingleCat extends React.Component {
     const { cat } = this.props;
     return (
         <div className='card single-cat row justify-content-center'>
-            <h2 className='card-title'>{cat.title}</h2>
+            <h2 className='card-label'>{cat.label}</h2>
             <button className='btn btn-success' onClick={this.link}> Articles </button>
             <button className='btn btn-danger' onClick={this.update}> Update </button>
 
