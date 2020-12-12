@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-const url = 'http://localhost:8088';
+const url = 'http://localhost:8000';
 
-const getAllCats = () => axios.get(`${url}/categories`);
+const headers = {
+  headers: {
+    Authorization: `Token ${localStorage.getItem('token')}`,
+  },
+};
+
+const getAllCats = () => axios.get(`${url}/categories`, headers);
 
 const deleteCat = (id) => axios.delete(`${url}/categories/${id}`);
 
