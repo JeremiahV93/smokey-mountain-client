@@ -1,4 +1,5 @@
 import React from 'react';
+import './SingleTag.scss';
 
 import tagData from '../../../data/tagData';
 
