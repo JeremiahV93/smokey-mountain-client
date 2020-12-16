@@ -1,9 +1,15 @@
+/* eslint-disable no-undef */
 import React from 'react';
+
 import './SingleTag.scss';
 
 import tagData from '../../../data/tagData';
 
 class SingleTag extends React.Component {
+  state = {
+    isOPen: false,
+  }
+
   deleteTag = (e) => {
     e.preventDefault();
     const { tag } = this.props;
@@ -17,13 +23,18 @@ class SingleTag extends React.Component {
 
   update = () => {
     const { tag } = this.props;
-    this.props.updateTag(tag.title, tag.id);
+    this.props.updateThisTag(tag.label, tag.id);
   }
 
   link = (e) => {
     e.preventDefault();
     const { tag } = this.props;
     this.props.history.push(`/articles/${tag.id}`);
+  }
+
+  tagUpdate = (e) => {
+    e.preventDefault();
+    this.setState({ label: e.target.value });
   }
 
   render() {

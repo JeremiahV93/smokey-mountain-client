@@ -23,7 +23,7 @@ const deleteTag = (id) => axios.delete(`${url}/tags/${id}`, headers);
 
 const createTag = (newTag) => axios.post(`${url}/tags`, newTag, createHeaders);
 
-const updateTag = (id, editedTag) => axios.put(`${url}/tags/${id}`, editedTag);
+const updateTag = (id, editedTag) => axios.put(`${url}/tags/${id}`, editedTag, createHeaders);
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
