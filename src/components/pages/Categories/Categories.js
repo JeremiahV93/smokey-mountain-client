@@ -12,6 +12,7 @@ class Catergories extends React.Component {
     isOpen: false,
     label: '',
     catId: null,
+    updating: false,
   }
 
  getCatData = () => {
