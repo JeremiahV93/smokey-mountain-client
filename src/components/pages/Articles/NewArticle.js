@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import articleData from '../../../data/articleData';
 import categoryData from '../../../data/categoryData';
+import tagData from '../../../data/tagData';
 import './NewArticle.scss';
 
 class NewArticle extends React.Component {
@@ -11,11 +12,15 @@ class NewArticle extends React.Component {
     content: '',
     imageUrl: '',
     cats: [],
+    tags: [],
   }
 
   componentDidMount() {
     categoryData.getAllCats()
       .then((res) => this.setState({ cats: res.data }))
+      .catch((err) => console.error(err));
+    tagData.getAllTags()
+      .then((res) => this.setState({ tags: res.data }))
       .catch((err) => console.error(err));
   }
 
