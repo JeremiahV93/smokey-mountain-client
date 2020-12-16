@@ -36,7 +36,7 @@ class Tags extends React.Component {
     const jsonTag = JSON.stringify(tag);
 
     if (updating) {
-      tagData.updateTag(jsonTag, tagId)
+      tagData.updateTag(tagId, jsonTag)
         .then(() => {
           this.setState({ isOpen: false, label: '' });
           this.getTagData();
@@ -59,7 +59,7 @@ class Tags extends React.Component {
   }
 
   render() {
-    const { tags, isOpen } = this.state;
+    const { tags, isOpen, label } = this.state;
     const { history } = this.props;
     const buildTags = tags.map((tag) => <SingleTag tag={tag} updateThisTag={this.updateThisTag} history={history} key={tag.id} />);
 
@@ -78,7 +78,7 @@ class Tags extends React.Component {
                 <form>
                     <div className="form-group">
                       <label htmlFor="tagName">Tag Name:</label>
-                      <input type="tagName" onChange={this.tagUpdate} className="form-control" aria-describedby="emailHelp" />
+                      <input type="tagName" onChange={this.tagUpdate} value={label} className="form-control" aria-describedby="emailHelp" />
                     </div>
                     <button onClick={this.submitTag} className="btn btn-primary">Submit</button>
                   </form>
