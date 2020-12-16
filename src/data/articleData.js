@@ -17,7 +17,7 @@ const createHeaders = {
 
 const getAllArticles = () => axios.get(`${url}/posts`, headers);
 
-const getSingleArticlebyId = (articleId) => axios.get(`${url}/articles/${articleId}`);
+const getSingleArticlebyId = (articleId) => axios.get(`${url}/posts/${articleId}`, headers);
 
 const getArticlesByCategoryId = (categoryId) => axios.get(`${url}/article_category/${categoryId}`);
 
@@ -25,7 +25,7 @@ const deleteArticle = (id) => axios.delete(`${url}/posts/${id}`, headers);
 
 const createArticle = (newArticle) => axios.post(`${url}/posts`, newArticle, createHeaders);
 
-const updateArticle = (id, editedArticle) => axios.put(`${url}/articles/${id}`, editedArticle);
+const updateArticle = (id, editedArticle) => axios.put(`${url}/posts/${id}`, editedArticle, createHeaders);
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
