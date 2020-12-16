@@ -1,5 +1,8 @@
 /* eslint-disable no-undef */
 import React from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { Grid, Button } from '@material-ui/core';
 
 import './SingleTag.scss';
 
@@ -41,9 +44,13 @@ class SingleTag extends React.Component {
     const { tag } = this.props;
     return (
       <div className='card single-tag row justify-content-center'>
-        <h2 className='card-title'>{tag.label}</h2>
-        <button className='btn btn-danger' onClick={this.update}> Update </button>
-        <button className='btn btn-warning' onClick={this.deleteTag}>Delete Tag</button>
+        <Grid container direction="row" alignItems="center">
+        <div className='button-group'>
+        <Button onClick={this.update}><SettingsIcon></SettingsIcon></Button>
+        <Button className='delete-button' onClick={this.deleteTag}><DeleteIcon></DeleteIcon></Button>
+        </div>
+        <h4>{tag.label}</h4>
+        </Grid>
       </div>
     );
   }
