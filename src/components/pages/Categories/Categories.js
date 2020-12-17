@@ -59,10 +59,16 @@ class Catergories extends React.Component {
     });
   }
 
+  deleteCategory = (id) => {
+    categoryData.deleteCat(id)
+      .then(() => { this.getCatData(); })
+      .catch((err) => console.error(err));
+  }
+
   render() {
     const { categories, isOpen, label } = this.state;
     const { history } = this.props;
-    const buildCats = categories.map((cat) => <SingleCat cat={cat} updateCat={this.updateCat} history={history} key={cat.id} />);
+    const buildCats = categories.map((cat) => <SingleCat cat={cat} updateCat={this.updateCat} deleteCategory={this.deleteCategory} history={history} key={cat.id} />);
 
     const toggle = () => this.setState({ isOpen: !isOpen });
 

@@ -17,7 +17,7 @@ const createHeaders = {
 
 const getAllCats = () => axios.get(`${url}/categories`, headers);
 
-const deleteCat = (id) => axios.delete(`${url}/categories/${id}`);
+const deleteCat = (id) => axios.delete(`${url}/categories/${id}`, headers);
 
 const addCategory = (obj) => axios.post(`${url}/categories`, obj, createHeaders);
 
