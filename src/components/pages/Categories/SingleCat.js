@@ -1,17 +1,11 @@
 import React from 'react';
 import './singleCat.scss';
 
-import catData from '../../../data/categoryData';
-
 class SingleCat extends React.Component {
-  deleteCategory = (e) => {
+  deleteCat = (e) => {
     e.preventDefault();
-    const { cat } = this.props;
-    catData.deleteCat(cat.id)
-      .then(() => {
-        this.props.history.push('/home');
-      })
-      .catch((err) => console.error(err));
+    const { deleteCategory } = this.props;
+    deleteCategory(this.props.cat.id);
   }
 
   update = () => {
@@ -33,7 +27,7 @@ class SingleCat extends React.Component {
             <button className='btn btn-success' onClick={this.link}> Articles </button>
             <button className='btn btn-danger' onClick={this.update}> Update </button>
 
-            <button className='btn btn-warning' onClick={this.deleteCategory}>Delete Category</button>
+            <button className='btn btn-warning' onClick={this.deleteCat}>Delete Category</button>
         </div>
     );
   }
