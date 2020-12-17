@@ -16,9 +16,7 @@ class EditArticle extends React.Component {
     componentDidMount() {
       articleData.getSingleArticlebyId(this.props.match.params.articleId)
         .then((res) => {
-          this.setState({
-            title: res.data.title, categoryId: res.data.category.id, content: res.data.content, imageUrl: res.data.image_url,
-          });
+          this.setState({ artData: res.data, categoryId: res.data.category.id });
         })
         .catch((err) => console.error(err));
       categoryData.getAllCats()
@@ -82,20 +80,18 @@ class EditArticle extends React.Component {
     };
 
     render() {
-      const {
-        cats, categoryId, content, title, imageUrl,
-      } = this.state;
+      const { artData, cats, categoryId } = this.state;
       return (
         <div className="form-wrapper">
           <h1 className="text-center mt-3">Create New Article</h1>
             <form>
               <div className="form-group">
                 <label htmlFor="title">Title: </label>
-                <input type="text" className="form-control" id="title" value={title} onChange={this.changeTitleEvent} />
+                <input type="text" className="form-control" id="title" value={artData.title} onChange={this.changeTitleEvent} />
               </div>
               <div className="form-group">
                 <label htmlFor="imageUrl"> Image Url: </label>
-                <input type="text" className="form-control" id="imageUrl" value={imageUrl} onChange={this.URLEvent} />
+                <input type="text" className="form-control" id="imageUrl" value={artData.image_url} onChange={this.URLEvent} />
               </div>
               <div className="form-group">
                 <label htmlFor="categoryId">Category</label>
@@ -106,7 +102,7 @@ class EditArticle extends React.Component {
               </div>
               <div className="form-group">
                 <label htmlFor="content">Content</label>
-                <textarea className="form-control" id="content" rows="3" value={content} onChange={this.changeContentEvent}/>
+                <textarea className="form-control" id="content" rows="3" value={artData.content} onChange={this.changeContentEvent}/>
               </div>
               <button className="btn btn-light" onClick={this.editThisArticle}>Update</button>
             </form>
