@@ -63,7 +63,7 @@ class Tags extends React.Component {
   render() {
     const { tags, isOpen, label } = this.state;
     const { history } = this.props;
-    const buildTags = tags.map((tag) => <SingleTag tag={tag} updateThisTag={this.updateThisTag} history={history} key={tag.id} />);
+    const buildTags = tags.map((tag) => <SingleTag tag={tag} getTagData={this.getTagData} updateThisTag={this.updateThisTag} history={history} key={tag.id} />);
 
     const toggle = () => this.setState({ isOpen: !isOpen });
 
