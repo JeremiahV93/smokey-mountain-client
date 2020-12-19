@@ -2,7 +2,8 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { Grid, Button } from '@material-ui/core';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 import './SingleTag.scss';
 
@@ -43,14 +44,12 @@ class SingleTag extends React.Component {
   render() {
     const { tag } = this.props;
     return (
-      <div className='card single-tag row justify-content-center'>
-        <Grid container direction="row" alignItems="center">
-        <div className='button-group'>
-        <Button onClick={this.update}><SettingsIcon></SettingsIcon></Button>
-        <Button className='delete-button' onClick={this.deleteTag}><DeleteIcon></DeleteIcon></Button>
-        </div>
-        <h4>{tag.label}</h4>
-        </Grid>
+      <div className='card single-tag'>
+        <TableRow className='button-group'>
+          <TableCell onClick={this.update}><SettingsIcon></SettingsIcon></TableCell>
+          <TableCell className='delete-button' onClick={this.deleteTag}><DeleteIcon></DeleteIcon></TableCell>
+          <TableCell className='card-label'>{tag.label}</TableCell>
+        </TableRow>
       </div>
     );
   }

@@ -1,4 +1,6 @@
 import React from 'react';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
 
 import {
   Collapse, Button, CardBody, Card,
@@ -66,10 +68,10 @@ class Tags extends React.Component {
     const toggle = () => this.setState({ isOpen: !isOpen });
 
     return (
-      <div className='tags container'>
-        <div className='row'>
+      <Table>
+        <TableHead>
           <h1> Tag Management</h1>
-        </div>
+        </TableHead>
         <div>
         <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Add Tag</Button>
               <Collapse isOpen={isOpen}>
@@ -87,7 +89,7 @@ class Tags extends React.Component {
             </Collapse>
         </div>
           { buildTags }
-      </div>
+      </Table>
     );
   }
 }
