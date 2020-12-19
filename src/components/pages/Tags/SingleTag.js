@@ -47,9 +47,8 @@ class SingleTag extends React.Component {
     return (
       <div className='card single-tag'>
         <TableRow className='button-group'>
-          <Modal tag={tag}/>
+          <TableCell><Modal tag={tag} deleteTag={this.deleteTag}/></TableCell>
           <TableCell onClick={this.update}><SettingsIcon></SettingsIcon></TableCell>
-          <TableCell className='delete-button' onClick={this.deleteTag}><DeleteIcon></DeleteIcon></TableCell>
           <TableCell className='card-label'>{tag.label}</TableCell>
         </TableRow>
       </div>

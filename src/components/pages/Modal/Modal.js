@@ -14,13 +14,17 @@ class BootstrapModal extends React.Component {
     this.setState({ showHide: !this.state.showHide });
   }
 
-  render() {
+  closeModal = (e) => {
     const { deleteTag } = this.props;
+    this.handleModalShowHide();
+    deleteTag(e);
+  }
+
+  render() {
     return (
             <div>
-                <Button onClick={() => this.handleModalShowHide()}>
-                    <DeleteIcon></DeleteIcon>
-                </Button>
+                <DeleteIcon onClick={() => this.handleModalShowHide()}>
+                </DeleteIcon>
 
                 <Modal show={this.state.showHide}>
                     <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
@@ -29,9 +33,9 @@ class BootstrapModal extends React.Component {
                     <Modal.Body>Are you sure you want to delete this tag?</Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={() => this.handleModalShowHide()}>
-                        Close
+                        No
                     </Button>
-                    <Button variant="primary" onClick={deleteTag, this.handleModalShowHide()}>
+                    <Button variant="primary" onClick={this.closeModal}>
                         Yes
                     </Button>
                     </Modal.Footer>
