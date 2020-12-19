@@ -1,17 +1,16 @@
 import React from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SettingsIcon from '@material-ui/icons/Settings';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 import './singleCat.scss';
 
-import catData from '../../../data/categoryData';
-
 class SingleCat extends React.Component {
-  deleteCategory = (e) => {
+  deleteCat = (e) => {
     e.preventDefault();
-    const { cat } = this.props;
-    catData.deleteCat(cat.id)
-      .then(() => {
-        this.props.history.push('/home');
-      })
-      .catch((err) => console.error(err));
+    const { deleteCategory } = this.props;
+    deleteCategory(this.props.cat.id);
   }
 
   update = () => {
@@ -28,12 +27,12 @@ class SingleCat extends React.Component {
   render() {
     const { cat } = this.props;
     return (
-        <div className='card single-cat row justify-content-center'>
-            <h2 className='card-label'>{cat.label}</h2>
-            <button className='btn btn-success' onClick={this.link}> Articles </button>
-            <button className='btn btn-danger' onClick={this.update}> Update </button>
-
-            <button className='btn btn-warning' onClick={this.deleteCategory}>Delete Category</button>
+        <div className='card single-cat'>
+            <TableRow className='button-group'>
+            <TableCell onClick={this.update}><SettingsIcon></SettingsIcon> </TableCell>
+            <TableCell onClick={this.deleteCat}><DeleteIcon></DeleteIcon></TableCell>
+            <TableCell className='card-label'>{cat.label}</TableCell>
+          </TableRow>
         </div>
     );
   }

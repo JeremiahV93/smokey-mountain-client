@@ -1,4 +1,6 @@
 import React from 'react';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
 
 import {
   Collapse, Button, CardBody, Card,
@@ -59,18 +61,24 @@ class Catergories extends React.Component {
     });
   }
 
+  deleteCategory = (id) => {
+    categoryData.deleteCat(id)
+      .then(() => { this.getCatData(); })
+      .catch((err) => console.error(err));
+  }
+
   render() {
     const { categories, isOpen, label } = this.state;
     const { history } = this.props;
-    const buildCats = categories.map((cat) => <SingleCat cat={cat} updateCat={this.updateCat} history={history} key={cat.id} />);
+    const buildCats = categories.map((cat) => <SingleCat cat={cat} updateCat={this.updateCat} deleteCategory={this.deleteCategory} history={history} key={cat.id} />);
 
     const toggle = () => this.setState({ isOpen: !isOpen });
 
     return (
-      <div className='categories container'>
-          <div className='row'>
+      <Table>
+          <TableHead>
             <h1>Categories</h1>
-          </div>
+          </TableHead>
           <div>
             <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Add Category</Button>
               <Collapse isOpen={isOpen}>
@@ -88,7 +96,7 @@ class Catergories extends React.Component {
             </Collapse>
           </div>
             { buildCats }
-      </div>
+      </Table>
     );
   }
 }
