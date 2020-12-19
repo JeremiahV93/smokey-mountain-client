@@ -76,8 +76,6 @@ class NewArticle extends React.Component {
       postTags.push(e.target.value);
       this.setState({ postTags });
     } else {
-      // arr = arr.filter(item => item !== value)
-
       postTags = postTags.filter((item) => item !== e.target.value);
       this.setState({ postTags });
     }
@@ -102,7 +100,7 @@ class NewArticle extends React.Component {
           <label htmlFor="categoryId">Category ID</label>
           <select className="form-control" id="categoryId" placeholder="categoryId" onChange={this.changeCategoryEvent}>
             <option>Please select a category</option>
-            {cats.map((cat) => <option value={cat.id}> {cat.label}</option>)}
+            {cats.map((cat) => <option value={cat.id} > {cat.label}</option>)}
           </ select>
         </div>
         <div className="form-group">

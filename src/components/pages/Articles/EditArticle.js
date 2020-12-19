@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import articleData from '../../../data/articleData';
 import categoryData from '../../../data/categoryData';
+import tagData from '../../../data/tagData';
 
 class EditArticle extends React.Component {
     state = {
@@ -11,16 +12,23 @@ class EditArticle extends React.Component {
       imageUrl: '',
       artData: {},
       cats: [],
+      tags: [],
+      postTags: [],
     }
 
     componentDidMount() {
       articleData.getSingleArticlebyId(this.props.match.params.articleId)
-        .then((res) => {
-          this.setState({ artData: res.data, categoryId: res.data.category.id });
+        .then((artData) => {
+          categoryData.getAllCats()
+            .then((allCats) => {
+              tagData.getAllTags()
+                .then((allTags) => {
+                  this.setState({
+                    artData: artData.data, categoryId: artData.data.category.id, cats: allCats.data, tags: allTags.data,
+                  });
+                });
+            });
         })
-        .catch((err) => console.error(err));
-      categoryData.getAllCats()
-        .then((res) => this.setState({ cats: res.data }))
         .catch((err) => console.error(err));
     }
 
@@ -54,11 +62,23 @@ class EditArticle extends React.Component {
     editThisArticle = (e) => {
       e.preventDefault();
       const {
-        categoryId, content, title, imageUrl,
+        categoryId, content, title, imageUrl, artData, postTags,
       } = this.state;
       const userId = localStorage.getItem('user_id');
       const creationDate = Date.now();
       const publicationDate = moment(creationDate).format('YYYY-MM-DD');
+
+      const tempArr = [];
+
+      const posttagsFind = () => {
+        artData.posttags.forEach((postTagObj) => {
+          tempArr.push(postTagObj.tag.id);
+        });
+      };
+
+      posttagsFind();
+
+      const allPostTags = tempArr.concat(postTags);
 
       const editedArticle = {
         user_id: userId,
@@ -68,6 +88,7 @@ class EditArticle extends React.Component {
         image_url: imageUrl,
         title,
         approved: true,
+        posttags: allPostTags,
 
       };
       const jsonArticle = JSON.stringify(editedArticle);
@@ -79,11 +100,27 @@ class EditArticle extends React.Component {
         .catch((err) => console.error('edit article broke', err));
     };
 
+    checkChange = (e) => {
+      let { postTags } = this.state;
+
+      if (e.target.checked) {
+        postTags.push(e.target.value);
+        this.setState({ postTags });
+      } else {
+        postTags = postTags.filter((item) => item !== e.target.value);
+        this.setState({ postTags });
+      }
+    }
+
     render() {
-      const { artData, cats, categoryId } = this.state;
+      const {
+        artData, cats, categoryId, tags,
+      } = this.state;
+      const postTags = artData.posttags;
+
       return (
         <div className="form-wrapper">
-          <h1 className="text-center mt-3">Create New Article</h1>
+          <h1 className="text-center mt-3">Edit Article</h1>
             <form>
               <div className="form-group">
                 <label htmlFor="title">Title: </label>
@@ -104,6 +141,21 @@ class EditArticle extends React.Component {
                 <label htmlFor="content">Content</label>
                 <textarea className="form-control" id="content" rows="3" value={artData.content} onChange={this.changeContentEvent}/>
               </div>
+              {
+              tags.map((tag) => {
+                if (postTags.some((postTagObj) => tag.id === postTagObj.tag.id)) {
+                  return <div>
+                  <input type="checkbox" id={tag.id} name={tag.label} value={tag.id} defaultChecked={true} readyonly={false} onChange={this.checkChange} />
+                  <label for={tag.label}> {tag.label} </label>
+              </div>;
+                }
+
+                return <div>
+                <input type="checkbox" id={tag.id} name={tag.label} value={tag.id} onChange={this.checkChange} />
+                <label for={tag.label}> {tag.label} </label>
+            </div>;
+              })
+              }
               <button className="btn btn-light" onClick={this.editThisArticle}>Update</button>
             </form>
         </div>
