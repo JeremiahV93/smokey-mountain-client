@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SettingsIcon from '@material-ui/icons/Settings';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Modal from '../Modal/Modal';
 
 import './SingleTag.scss';
 
@@ -16,11 +17,11 @@ class SingleTag extends React.Component {
 
   deleteTag = (e) => {
     e.preventDefault();
-    const { tag } = this.props;
+    const { tag, getTagData } = this.props;
     console.error(tag.id);
     tagData.deleteTag(tag.id)
       .then(() => {
-        this.props.history.push('/home');
+        getTagData();
       })
       .catch((err) => console.error(err));
   }
@@ -46,8 +47,8 @@ class SingleTag extends React.Component {
     return (
       <div className='card single-tag'>
         <TableRow className='button-group'>
+          <TableCell><Modal tag={tag} deleteTag={this.deleteTag}/></TableCell>
           <TableCell onClick={this.update}><SettingsIcon></SettingsIcon></TableCell>
-          <TableCell className='delete-button' onClick={this.deleteTag}><DeleteIcon></DeleteIcon></TableCell>
           <TableCell className='card-label'>{tag.label}</TableCell>
         </TableRow>
       </div>
