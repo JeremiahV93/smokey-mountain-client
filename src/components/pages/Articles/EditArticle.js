@@ -14,6 +14,7 @@ class EditArticle extends React.Component {
       cats: [],
       tags: [],
       postTags: [],
+      existingPostTags: [],
     }
 
     componentDidMount() {
@@ -24,8 +25,15 @@ class EditArticle extends React.Component {
               tagData.getAllTags()
                 .then((allTags) => {
                   this.setState({
-                    artData: artData.data, categoryId: artData.data.category.id, cats: allCats.data, tags: allTags.data,
+                    artData: artData.data,
+                    categoryId: artData.data.category.id,
+                    cats: allCats.data,
+                    tags: allTags.data,
+                    title: artData.data.title,
+                    imageUrl: artData.data.image_url,
+                    content: artData.data.content,
                   });
+                  this.setState({ existingPostTags: artData.data.posttags });
                 });
             });
         })
@@ -52,33 +60,14 @@ class EditArticle extends React.Component {
       this.setState({ imageUrl: e.target.value });
     }
 
-    // trying to make an event that handles all changes
-    // handleControlledInputChange = (event) => {
-    //   const { id } = event.target;
-    //   const { value } = event.target;
-    //   this.setState({ id: value });
-    // }
-
     editThisArticle = (e) => {
       e.preventDefault();
       const {
-        categoryId, content, title, imageUrl, artData, postTags,
+        categoryId, content, title, imageUrl,
       } = this.state;
       const userId = localStorage.getItem('user_id');
       const creationDate = Date.now();
       const publicationDate = moment(creationDate).format('YYYY-MM-DD');
-
-      const tempArr = [];
-
-      const posttagsFind = () => {
-        artData.posttags.forEach((postTagObj) => {
-          tempArr.push(postTagObj.tag.id);
-        });
-      };
-
-      posttagsFind();
-
-      const allPostTags = tempArr.concat(postTags);
 
       const editedArticle = {
         user_id: userId,
@@ -88,8 +77,6 @@ class EditArticle extends React.Component {
         image_url: imageUrl,
         title,
         approved: true,
-        posttags: allPostTags,
-
       };
       const jsonArticle = JSON.stringify(editedArticle);
       const { articleId } = this.props.match.params;
@@ -114,7 +101,7 @@ class EditArticle extends React.Component {
 
     render() {
       const {
-        artData, cats, categoryId, tags,
+        artData, cats, categoryId, tags, title, imageUrl, content,
       } = this.state;
       const postTags = artData.posttags;
 
@@ -124,11 +111,11 @@ class EditArticle extends React.Component {
             <form>
               <div className="form-group">
                 <label htmlFor="title">Title: </label>
-                <input type="text" className="form-control" id="title" value={artData.title} onChange={this.changeTitleEvent} />
+                <input type="text" className="form-control" id="title" value={title} onChange={this.changeTitleEvent} />
               </div>
               <div className="form-group">
                 <label htmlFor="imageUrl"> Image Url: </label>
-                <input type="text" className="form-control" id="imageUrl" value={artData.image_url} onChange={this.URLEvent} />
+                <input type="text" className="form-control" id="imageUrl" value={imageUrl} onChange={this.URLEvent} />
               </div>
               <div className="form-group">
                 <label htmlFor="categoryId">Category</label>
@@ -139,7 +126,7 @@ class EditArticle extends React.Component {
               </div>
               <div className="form-group">
                 <label htmlFor="content">Content</label>
-                <textarea className="form-control" id="content" rows="3" value={artData.content} onChange={this.changeContentEvent}/>
+                <textarea className="form-control" id="content" rows="3" value={content} onChange={this.changeContentEvent}/>
               </div>
               {
               tags.map((tag) => {
