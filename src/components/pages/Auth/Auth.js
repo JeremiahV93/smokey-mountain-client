@@ -44,82 +44,82 @@ verifyEmail = (e) => {
     .catch((err) => console.error(err));
 }
 
-createAccount = (e) => {
-  e.preventDefault();
-  const {
-    userName, firstName, lastName, username, password, profileImageUrl, bio,
-  } = this.state;
+// createAccount = (e) => {
+//   e.preventDefault();
+//   const {
+//     userName, firstName, lastName, username, password, profileImageUrl, bio,
+//   } = this.state;
 
-  let { date } = this.state;
+//   let { date } = this.state;
 
-  date = moment(date).format('YYYY-MM-DD');
+//   date = moment(date).format('YYYY-MM-DD');
 
-  const newUser = {
-    first_name: firstName,
-    last_name: lastName,
-    userName,
-    username,
-    created_on: date,
-    password,
-    bio,
-    profile_image_url: profileImageUrl,
+//   const newUser = {
+//     first_name: firstName,
+//     last_name: lastName,
+//     userName,
+//     username,
+//     created_on: date,
+//     password,
+//     bio,
+//     profile_image_url: profileImageUrl,
 
-  };
-  const jsonUser = JSON.stringify(newUser);
+//   };
+//   const jsonUser = JSON.stringify(newUser);
 
-  userData.addUser(jsonUser)
-    .then((res) => {
-      if (res.data.valid === true) {
-        localStorage.setItem('authed', true);
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('user_id', res.data.user_id);
-        this.props.authToggle();
-      } else {
-        console.error('incorrecct password and/or username');
-      }
-    })
-    .catch((err) => console.error(err));
-}
+//   userData.addUser(jsonUser)
+//     .then((res) => {
+//       if (res.data.valid === true) {
+//         localStorage.setItem('authed', true);
+//         localStorage.setItem('token', res.data.token);
+//         localStorage.setItem('user_id', res.data.user_id);
+//         this.props.authToggle();
+//       } else {
+//         console.error('incorrecct password and/or username');
+//       }
+//     })
+//     .catch((err) => console.error(err));
+// }
 
-usernameChange = (e) => {
-  e.preventDefault();
-  this.setState({ username: e.target.value });
-}
+// usernameChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ username: e.target.value });
+// }
 
-emailChange = (e) => {
-  e.preventDefault();
-  this.setState({ userName: e.target.value });
-}
+// emailChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ userName: e.target.value });
+// }
 
-passwordChange = (e) => {
-  e.preventDefault();
-  this.setState({ password: e.target.value });
-}
+// passwordChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ password: e.target.value });
+// }
 
-firstNameChange = (e) => {
-  e.preventDefault();
-  this.setState({ firstName: e.target.value });
-}
+// firstNameChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ firstName: e.target.value });
+// }
 
-lastNameChange = (e) => {
-  e.preventDefault();
-  this.setState({ lastName: e.target.value });
-}
+// lastNameChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ lastName: e.target.value });
+// }
 
-usernameChange = (e) => {
-  e.preventDefault();
-  this.setState({ username: e.target.value });
-}
+// usernameChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ username: e.target.value });
+// }
 
-bioChange = (e) => {
-  e.preventDefault();
-  this.setState({ bio: e.target.value });
-}
+// bioChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ bio: e.target.value });
+// }
 
-imageUrlChange = (e) => {
-  e.preventDefault();
-  this.setState({ profileImageUrl: e.target.value });
-}
+// imageUrlChange = (e) => {
+//   e.preventDefault();
+//   this.setState({ profileImageUrl: e.target.value });
+// }
 
 render() {
   return (
