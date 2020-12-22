@@ -27,7 +27,9 @@ const createArticle = (newArticle) => axios.post(`${url}/posts`, newArticle, cre
 
 const updateArticle = (id, editedArticle) => axios.put(`${url}/posts/${id}`, editedArticle, createHeaders);
 
+const updatePostTags = (postTagArr) => axios.post(`${url}/ptags`, postTagArr, headers);
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  getSingleArticlebyId, deleteArticle, createArticle, updateArticle, getArticlesByCategoryId, getAllArticles,
+  getSingleArticlebyId, deleteArticle, createArticle, updateArticle, getArticlesByCategoryId, getAllArticles, updatePostTags,
 };
