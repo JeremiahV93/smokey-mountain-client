@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { Grid, Button } from '@material-ui/core';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Modal from '../Modal/Modal';
 
 import './SingleTag.scss';
 
@@ -15,11 +16,11 @@ class SingleTag extends React.Component {
 
   deleteTag = (e) => {
     e.preventDefault();
-    const { tag } = this.props;
+    const { tag, getTagData } = this.props;
     console.error(tag.id);
     tagData.deleteTag(tag.id)
       .then(() => {
-        this.props.history.push('/home');
+        getTagData();
       })
       .catch((err) => console.error(err));
   }
@@ -43,14 +44,12 @@ class SingleTag extends React.Component {
   render() {
     const { tag } = this.props;
     return (
-      <div className='card single-tag row justify-content-center'>
-        <Grid container direction="row" alignItems="center">
-        <div className='button-group'>
-        <Button onClick={this.update}><SettingsIcon></SettingsIcon></Button>
-        <Button className='delete-button' onClick={this.deleteTag}><DeleteIcon></DeleteIcon></Button>
-        </div>
-        <h4>{tag.label}</h4>
-        </Grid>
+      <div className='card single-tag'>
+        <TableRow className='button-group'>
+          <TableCell><Modal tag={tag} deleteTag={this.deleteTag}/></TableCell>
+          <TableCell onClick={this.update}><SettingsIcon></SettingsIcon></TableCell>
+          <TableCell className='card-label'>{tag.label}</TableCell>
+        </TableRow>
       </div>
     );
   }
