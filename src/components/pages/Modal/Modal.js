@@ -28,15 +28,15 @@ class BootstrapModal extends React.Component {
 
                 <Modal show={this.state.showHide}>
                     <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>Are you sure you want to delete this tag?</Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={() => this.handleModalShowHide()}>
-                        No
+                        Cancel
                     </Button>
                     <Button variant="primary" onClick={this.closeModal}>
-                        Yes
+                        Ok
                     </Button>
                     </Modal.Footer>
                 </Modal>

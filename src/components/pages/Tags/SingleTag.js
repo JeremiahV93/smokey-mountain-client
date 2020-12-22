@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
 import SettingsIcon from '@material-ui/icons/Settings';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
