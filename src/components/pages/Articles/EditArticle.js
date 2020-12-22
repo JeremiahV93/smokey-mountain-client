@@ -33,7 +33,12 @@ class EditArticle extends React.Component {
                     imageUrl: artData.data.image_url,
                     content: artData.data.content,
                   });
-                  this.setState({ existingPostTags: artData.data.posttags });
+
+                  artData.data.posttags.forEach((tagObj) => {
+                    const { postTags } = this.state;
+                    postTags.push(tagObj.tag.id);
+                    this.setState({ postTags, existingPostTags: [...postTags] });
+                  });
                 });
             });
         })
@@ -69,6 +74,8 @@ class EditArticle extends React.Component {
       const creationDate = Date.now();
       const publicationDate = moment(creationDate).format('YYYY-MM-DD');
 
+      this.updatePostTags();
+
       const editedArticle = {
         user_id: userId,
         categoryId,
@@ -87,14 +94,49 @@ class EditArticle extends React.Component {
         .catch((err) => console.error('edit article broke', err));
     };
 
+    updatePostTags = () => {
+      const { postTags, existingPostTags } = this.state;
+
+      // Create an arr of postTagobjs w/ post ID, tag ID, and status keep, new, or delete
+      const postTagsArr = [];
+
+      // compare new postTags with existingPostTags
+      // you will have posttags that should be there, those that are missing, and new ones
+      // tags are all tags, postTags are current ones, existingPostTags are initial tags
+
+      const postid = parseInt(this.props.match.params.articleId, 10);
+
+      const keeps = postTags.filter((x) => existingPostTags.includes(x));
+      keeps.forEach((id) => {
+        const tempObj = { id, postid, status: 'keep' };
+        postTagsArr.push(tempObj);
+      });
+
+      const remove = existingPostTags.filter((x) => !postTags.includes(x));
+      remove.forEach((id) => {
+        const tempObj = { id, postid, status: 'delete' };
+        postTagsArr.push(tempObj);
+      });
+
+      const add = postTags.filter((x) => !existingPostTags.includes(x));
+      add.forEach((id) => {
+        const tempObj = { id, postid, status: 'create' };
+        postTagsArr.push(tempObj);
+      });
+      articleData.updatePostTags(postTagsArr)
+        .then()
+        .catch((err) => console.error(err));
+    }
+
     checkChange = (e) => {
       let { postTags } = this.state;
+      const value = parseInt(e.target.value, 10);
 
       if (e.target.checked) {
-        postTags.push(e.target.value);
+        postTags.push(value);
         this.setState({ postTags });
       } else {
-        postTags = postTags.filter((item) => item !== e.target.value);
+        postTags = postTags.filter((item) => item !== value);
         this.setState({ postTags });
       }
     }
