@@ -61,11 +61,7 @@ render() {
     }
 
     return (
-            <Nav>
-                <NavItem>
-                    <NavLink to='/Auth'>Login</NavLink>
-                </NavItem>
-            </Nav>
+            <Nav/>
     );
   };
   return (

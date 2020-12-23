@@ -20,6 +20,7 @@ import LandingPage from '../components/pages/Landingpage/landingpage';
 import Categories from '../components/pages/Categories/Categories';
 import Tags from '../components/pages/Tags/Tags';
 import Profile from '../components/pages/Profile/Profile';
+import NewUser from '../components/pages/NewUser/NewUser';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false
@@ -49,6 +50,7 @@ const RoutesContainer = ({ authed, authToggle }) => (
         <PrivateRoute path="/editarticles/:articleId" component={EditArticle} authed={authed} />
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>
         <PublicRoute path='/auth' component={Auth} authed={authed} authToggle={authToggle} />
+        <PublicRoute path='/newuser' component={NewUser} authed={authed} authToggle={authToggle} />
 
         <Redirect from='*' to='/home' />
       </Switch>
