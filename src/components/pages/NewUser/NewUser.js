@@ -15,7 +15,7 @@ import userData from '../../../data/userData';
 
 class NewUser extends React.Component {
 state = {
-  userName: '',
+  email: '',
   firstName: '',
   lastName: '',
   date: Date.now(),
@@ -47,7 +47,7 @@ verifyEmail = (e) => {
 createAccount = (e) => {
   e.preventDefault();
   const {
-    userName, firstName, lastName, username, password, profileImageUrl, bio,
+    email, firstName, lastName, username, password, profileImageUrl, bio,
   } = this.state;
 
   let { date } = this.state;
@@ -57,7 +57,7 @@ createAccount = (e) => {
   const newUser = {
     first_name: firstName,
     last_name: lastName,
-    userName,
+    email,
     username,
     created_on: date,
     password,
@@ -88,7 +88,7 @@ usernameChange = (e) => {
 
 emailChange = (e) => {
   e.preventDefault();
-  this.setState({ userName: e.target.value });
+  this.setState({ email: e.target.value });
 }
 
 passwordChange = (e) => {
@@ -104,11 +104,6 @@ firstNameChange = (e) => {
 lastNameChange = (e) => {
   e.preventDefault();
   this.setState({ lastName: e.target.value });
-}
-
-usernameChange = (e) => {
-  e.preventDefault();
-  this.setState({ username: e.target.value });
 }
 
 bioChange = (e) => {
