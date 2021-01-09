@@ -54,6 +54,9 @@ render() {
             <NavLink tag={RRNavLink} to='/tags'>Tag Management</NavLink>
           </NavItem>
           <NavItem>
+            <NavLink tag={RRNavLink} to='/comments'>Comments</NavLink>
+          </NavItem>
+          <NavItem>
             <Logout authToggle={authToggle}/>
           </NavItem>
         </Nav>
