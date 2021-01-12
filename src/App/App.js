@@ -47,7 +47,7 @@ const RoutesContainer = ({ authed, authToggle }) => (
         <PrivateRoute path="/articles/:categoryId" component={Articles} authed={authed} />
         <PrivateRoute path="/newarticle" component={NewArticle} authed={authed} />
         <PrivateRoute path='/profile' component={Profile} authed={authed} />
-        <PrivateRoute path='/comments' component={Comments} authed={authed} />
+        <PrivateRoute path='/comments/:articleId' component={Comments} authed={authed} />
 
         <PrivateRoute path="/editarticles/:articleId" component={EditArticle} authed={authed} />
         <PublicRoute path='/landingPage' component={LandingPage} authed={authed}/>

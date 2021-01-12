@@ -1,13 +1,17 @@
 import React from 'react';
 
-class Comments extends React.Component {
+class SingleComment extends React.Component {
   render() {
     const { comment } = this.props;
 
     return (
-      <h1>{comment.comment}</h1>
+      <div className='card'>
+          <h2>{comment.rareuser.user.username}</h2>
+          <p>{comment.date}</p>
+          <h4>{comment.comment}</h4>
+      </div>
     );
   }
 }
 
-export default Comments;
+export default SingleComment;
