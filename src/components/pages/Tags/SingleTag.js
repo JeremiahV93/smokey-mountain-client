@@ -4,6 +4,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Trashmodal from '../Modal/Trashmodal';
+import Editmodal from '../Modal/Editmodal';
 import './SingleTag.scss';
 
 import tagData from '../../../data/tagData';
@@ -46,7 +47,7 @@ class SingleTag extends React.Component {
       <div className='card single-tag'>
         <TableRow className='button-group'>
           <TableCell><Trashmodal tag={tag} deleteTag={this.deleteTag}/></TableCell>
-          <TableCell onClick={this.update}><SettingsIcon></SettingsIcon></TableCell>
+          <TableCell><Editmodal tag={tag} update={this.update}/> </TableCell>
           <TableCell className='card-label'>{tag.label}</TableCell>
         </TableRow>
       </div>
