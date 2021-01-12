@@ -2,11 +2,13 @@ import axios from 'axios';
 
 const url = 'http://localhost:8088';
 
-const headers = {
-  headers: {
-    Authorization: `Token ${localStorage.getItem('token')}`,
-  },
-};
+const headers = () => (
+  {
+    headers: {
+      Authorization: `Token ${localStorage.getItem('token')}`,
+    },
+  }
+);
 
 const createHeaders = {
   headers: {
@@ -15,9 +17,9 @@ const createHeaders = {
   },
 };
 
-const getAllCats = () => axios.get(`${url}/categories`, headers);
+const getAllCats = () => axios.get(`${url}/categories`, headers());
 
-const deleteCat = (id) => axios.delete(`${url}/categories/${id}`, headers);
+const deleteCat = (id) => axios.delete(`${url}/categories/${id}`, headers());
 
 const addCategory = (obj) => axios.post(`${url}/categories`, obj, createHeaders);
 

@@ -34,9 +34,11 @@ verifyEmail = (e) => {
   userData.authUser(user)
     .then((res) => {
       if (res.data.valid) {
+        console.log(res.data);
         localStorage.setItem('authed', true);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('user_id', res.data.user_id);
+        localStorage.setItem('isStaff', res.data.is_staff);
 
         this.props.authToggle();
       }
