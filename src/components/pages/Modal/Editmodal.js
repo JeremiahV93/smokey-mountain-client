@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import DeleteIcon from '@material-ui/icons/Delete';
+import SettingsIcon from '@material-ui/icons/Delete';
 
-class Trashmodal extends React.Component {
+class Editmodal extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -23,14 +23,14 @@ class Trashmodal extends React.Component {
   render() {
     return (
             <div>
-                <DeleteIcon onClick={() => this.handleModalShowHide()}>
-                </DeleteIcon>
+                <SettingsIcon onClick={() => this.handleModalShowHide()}>
+                </SettingsIcon>
 
                 <Modal show={this.state.showHide}>
                     <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
                     <Modal.Title></Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Are you sure you want to delete this tag?</Modal.Body>
+                    <Modal.Body>Edit this tag?</Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={() => this.handleModalShowHide()}>
                         Cancel
@@ -46,4 +46,4 @@ class Trashmodal extends React.Component {
   }
 }
 
-export default Trashmodal;
+export default Editmodal;

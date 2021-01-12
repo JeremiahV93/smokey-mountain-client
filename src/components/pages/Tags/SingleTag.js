@@ -3,8 +3,7 @@ import React from 'react';
 import SettingsIcon from '@material-ui/icons/Settings';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Modal from '../Modal/Modal';
-
+import Trashmodal from '../Modal/Trashmodal';
 import './SingleTag.scss';
 
 import tagData from '../../../data/tagData';
@@ -46,7 +45,7 @@ class SingleTag extends React.Component {
     return (
       <div className='card single-tag'>
         <TableRow className='button-group'>
-          <TableCell><Modal tag={tag} deleteTag={this.deleteTag}/></TableCell>
+          <TableCell><Trashmodal tag={tag} deleteTag={this.deleteTag}/></TableCell>
           <TableCell onClick={this.update}><SettingsIcon></SettingsIcon></TableCell>
           <TableCell className='card-label'>{tag.label}</TableCell>
         </TableRow>
