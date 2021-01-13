@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import SettingsIcon from '@material-ui/icons/Settings';
+// import SettingsIcon from '@material-ui/icons/Settings';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Trashmodal from '../Modal/Trashmodal';
