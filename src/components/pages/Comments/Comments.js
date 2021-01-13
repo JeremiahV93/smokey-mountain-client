@@ -33,6 +33,14 @@ class Comments extends React.Component {
       .catch((err) => console.error(err));
   }
 
+  deleteComment = (commentId) => {
+    commentData.deleteComment(commentId)
+      .then(() => {
+        this.getCommentData();
+      })
+      .catch((err) => console.error(err));
+  }
+
   render() {
     const { comments, postId, isOpen } = this.state;
     const toggle = () => this.setState({ isOpen: !isOpen });
@@ -46,7 +54,7 @@ class Comments extends React.Component {
             </Collapse>
         </div>
 
-        { comments.map((comment) => <SingleComment comment={comment} postId={this.props.match.params.articleId} key={comment.id} ></SingleComment>)}
+        { comments.map((comment) => <SingleComment comment={comment} deleteComment={this.deleteComment} postId={this.props.match.params.articleId} key={comment.id} ></SingleComment>)}
       </div>
     );
   }
