@@ -4,11 +4,9 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import tagData from '../../../data/tagData';
 
 class Editmodal extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showHide: false,
-    };
+  state = {
+    tagId: this.props.tag.id,
+    showHide: false,
   }
 
   handleModalShowHide() {
@@ -21,27 +19,23 @@ class Editmodal extends React.Component {
     deleteTag(e);
   }
 
+  tagUpdate = (e) => {
+    e.preventDefault();
+    this.setState({ label: e.target.value });
+  }
+
   submitTag = (e) => {
     e.preventDefault();
-    const { label, updating, tagId } = this.state;
+    const { label, tagId } = this.state;
     const tag = { label };
     const jsonTag = JSON.stringify(tag);
 
-    if (updating) {
-      tagData.updateTag(tagId, jsonTag)
-        .then(() => {
-          this.setState({ isOpen: false, label: '' });
-          this.getTagData();
-        })
-        .catch((err) => console.error(err));
-    } else {
-      tagData.createTag(jsonTag)
-        .then(() => {
-          this.setState({ isOpen: false, label: '' });
-          this.getTagData();
-        })
-        .catch((err) => console.error(err));
-    }
+    tagData.updateTag(tagId, jsonTag)
+      .then(() => {
+        this.setState({ isOpen: false, label: '' });
+        this.getTagData();
+      })
+      .catch((err) => console.error(err));
   }
 
   render() {
