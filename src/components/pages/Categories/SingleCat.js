@@ -1,11 +1,10 @@
 import React from 'react';
-import SettingsIcon from '@material-ui/icons/Settings';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import CDModal from '../CDModal/CDModal';
 import CEModal from '../CEModal/CEModal';
 
-import './singleCat.scss';
+import './SingleCat.scss';
 
 import categoryData from '../../../data/categoryData';
 
@@ -23,11 +22,6 @@ class SingleCat extends React.Component {
         getCatData();
       })
       .catch((err) => console.error(err));
-  }
-
-  update = () => {
-    const { cat } = this.props;
-    this.props.updateCat(cat.label, cat.id);
   }
 
   link = (e) => {
