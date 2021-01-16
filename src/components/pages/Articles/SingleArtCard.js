@@ -1,7 +1,13 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import articleData from '../../../data/articleData';
-import './SingleArtCard.scss';
 
 class SingleArtCard extends React.Component {
   deleteArticle = (e) => {
@@ -25,15 +31,19 @@ class SingleArtCard extends React.Component {
   render() {
     const { article } = this.props;
     return (
-        <div className='card single-art row justify-content-center' id="articleCard">
-            <h2 className='card-title text-center'>{article.title} </h2>
-            <h3 className='card-name text-center'>By: TBD </h3>
-            <h4 className='cart-category'>Category: {article.category.label}</h4>
-          <div className="card-footer text-center">
-            <button className='btn btn-primary' onClick={this.articleDetails}>Article Details</button>
-            <button className='btn btn-warning' onClick={this.deleteArticle}>Delete Article</button>
-          </div>
-        </div>
+      <Card className="root" variant="outlined">
+        <CardContent>
+            <Typography variant="h5" componenet="h2">
+              {article.title}
+            </Typography>
+            <Typography variant="body2" component="p">
+            Category: {article.category.label}
+            </Typography>
+
+            <Button variant="contained" onClick={this.articleDetails}>Article Details</Button>
+            <IconButton size="small" onClick={this.deleteArticle}><DeleteIcon /></IconButton>
+        </CardContent>
+      </Card>
     );
   }
 }
