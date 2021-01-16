@@ -2,24 +2,18 @@ import React from 'react';
 import moment from 'moment';
 
 class CommentForm extends React.Component {
-  state = {
-    comment: '',
-    userId: localStorage.getItem('user_id'),
-    postId: this.props.postId,
-  }
+  
 
-  componentDidMount() {
-  }
+  
 
-  commentChange = (e) => {
-    e.preventDefault();
-    this.setState({ comment: e.target.value });
-  }
+ 
 
   newComment = (e) => {
     e.preventDefault();
     const { comment, userId, postId } = this.state;
-    const { addComment } = this.props;
+    const {
+      addComment, updateComment, updating, commentId,
+    } = this.props;
     const creationDate = Date.now();
     const publicationDate = moment(creationDate).format('YYYY-MM-DD');
 
@@ -29,8 +23,14 @@ class CommentForm extends React.Component {
       post: postId,
       date: publicationDate,
     };
-    addComment(newCommentObj);
-    this.setState({ comment: '' });
+
+    if (updating) {
+      updateComment(commentId, newCommentObj);
+      this.setState({ comment: '' });
+    } else {
+      addComment(newCommentObj);
+      this.setState({ comment: '' });
+    }
   }
 
   render() {

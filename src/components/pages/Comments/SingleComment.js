@@ -2,20 +2,27 @@ import React from 'react';
 
 class SingleComment extends React.Component {
   render() {
-    const { comment } = this.props;
+    const { oneComment, updating } = this.props;
 
     const destroyComment = (e) => {
       e.preventDefault();
       const { deleteComment } = this.props;
-      deleteComment(comment.id);
+      deleteComment(oneComment.id);
+    };
+
+    const updateComment = (e) => {
+      e.preventDefault();
+      updating(oneComment.id, oneComment.comment);
     };
 
     return (
       <div className='card'>
-          <h2>{comment.rareuser.user.username}</h2>
-          <p>{comment.date}</p>
-          <h4>{comment.comment}</h4>
+          <h2>{oneComment.rareuser.user.username}</h2>
+          <p>{oneComment.date}</p>
+          <h4>{oneComment.comment}</h4>
           <button className='btn-danger' onClick={destroyComment}>Delete Comment</button>
+          <button className='btn-warning' onClick={updateComment}>Update Comment</button>
+
       </div>
     );
   }
