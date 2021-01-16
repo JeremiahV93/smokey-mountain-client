@@ -2,6 +2,7 @@ import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 
+///
 import {
   Collapse, Button, CardBody, Card,
 } from 'reactstrap';
@@ -24,11 +25,6 @@ class Tags extends React.Component {
 
   componentDidMount() {
     this.getTagData();
-  }
-
-  tagUpdate = (e) => {
-    e.preventDefault();
-    this.setState({ label: e.target.value });
   }
 
   submitTag = (e) => {
