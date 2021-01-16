@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
 import articleData from '../../../data/articleData';
 import SingleArticle from './SingleArtCard';
 import './Articles.scss';
@@ -33,7 +34,7 @@ class Articles extends React.Component {
         <div className="post-container">
           <h1 className="text-center">View All Articles</h1>
           <div className="container post-buttons">
-            <Link className="btn btn-secondary" to={'/newarticle'}><i className="fas fa-plus-square"></i> New Article</Link>
+            <Link to={'/newarticle'}><LibraryBooksRoundedIcon /> New Article</Link>
           </div>
              { buildArticles }
           </div>

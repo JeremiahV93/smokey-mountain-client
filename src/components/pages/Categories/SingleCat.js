@@ -1,21 +1,27 @@
 import React from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
-import SettingsIcon from '@material-ui/icons/Settings';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import CDModal from '../CDModal/CDModal';
+import CEModal from '../CEModal/CEModal';
 
-import './singleCat.scss';
+import './SingleCat.scss';
+
+import categoryData from '../../../data/categoryData';
 
 class SingleCat extends React.Component {
-  deleteCat = (e) => {
-    e.preventDefault();
-    const { deleteCategory } = this.props;
-    deleteCategory(this.props.cat.id);
+  state = {
+    isOpen: false,
   }
 
-  update = () => {
-    const { cat } = this.props;
-    this.props.updateCat(cat.label, cat.id);
+  deleteCat = (e) => {
+    e.preventDefault();
+    const { cat, getCatData } = this.props;
+    console.error(cat.id);
+    categoryData.deleteCat(cat.id)
+      .then(() => {
+        getCatData();
+      })
+      .catch((err) => console.error(err));
   }
 
   link = (e) => {
@@ -29,8 +35,8 @@ class SingleCat extends React.Component {
     return (
         <div className='card single-cat'>
             <TableRow className='button-group'>
-            <TableCell onClick={this.update}><SettingsIcon></SettingsIcon> </TableCell>
-            <TableCell onClick={this.deleteCat}><DeleteIcon></DeleteIcon></TableCell>
+            <TableCell><CEModal cat={cat} update={this.update}/></TableCell>
+            <TableCell><CDModal cat={cat} deleteCat={this.deleteCat}/></TableCell>
             <TableCell className='card-label'>{cat.label}</TableCell>
           </TableRow>
         </div>

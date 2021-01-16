@@ -10,7 +10,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-import moment from 'moment';
 import userData from '../../../data/userData';
 
 class Auth extends React.Component {
@@ -34,7 +33,6 @@ verifyEmail = (e) => {
   userData.authUser(user)
     .then((res) => {
       if (res.data.valid) {
-        console.log(res.data);
         localStorage.setItem('authed', true);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('user_id', res.data.user_id);
