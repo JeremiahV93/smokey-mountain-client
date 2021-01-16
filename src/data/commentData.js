@@ -16,5 +16,9 @@ const addComment = (commentobj) => axios.post(`${url}/comments`, commentobj, hea
 
 const deleteComment = (commentId) => axios.delete(`${url}/comments/${commentId}`, headers());
 
+const updateComment = (commentId, commentObj) => axios.put(`${url}/comments/${commentId}`, commentObj, headers());
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { commentsByPostId, addComment, deleteComment };
+export default {
+  commentsByPostId, addComment, deleteComment, updateComment,
+};

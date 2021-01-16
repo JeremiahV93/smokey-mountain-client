@@ -4,7 +4,7 @@ import TableRow from '@material-ui/core/TableRow';
 import CDModal from '../CDModal/CDModal';
 import CEModal from '../CEModal/CEModal';
 
-import './SingleCat.scss';
+import './singleCat.scss';
 
 import categoryData from '../../../data/categoryData';
 

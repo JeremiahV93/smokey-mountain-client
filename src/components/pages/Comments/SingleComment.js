@@ -5,27 +5,34 @@ import Typography from '@material-ui/core/Typography';
 
 class SingleComment extends React.Component {
   render() {
-    const { comment } = this.props;
+    const { oneComment, updating } = this.props;
 
     const destroyComment = (e) => {
       e.preventDefault();
       const { deleteComment } = this.props;
-      deleteComment(comment.id);
+      deleteComment(oneComment.id);
+    };
+
+    const updateComment = (e) => {
+      e.preventDefault();
+      updating(oneComment.id, oneComment.comment);
     };
 
     return (
        <Card className="root" variant="outlined" maxWidth>
         <CardContent>
           <Typography className="title" color="textSecondary" gutterBottom>
-          {comment.rareuser.user.username}
+          {oneComment.rareuser.user.username}
           </Typography>
           <Typography variant="h5" component="h2">
-          {comment.comment}
+          {oneComment.comment}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {comment.date}
+          {oneComment.date}
           </Typography>
           <button className='btn-danger' onClick={destroyComment}>Delete Comment</button>
+          <button className='btn-warning' onClick={updateComment}>Update Comment</button>
+
         </CardContent>
        </Card>
     );
