@@ -1,4 +1,7 @@
 import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 class SingleComment extends React.Component {
   render() {
@@ -16,14 +19,22 @@ class SingleComment extends React.Component {
     };
 
     return (
-      <div className='card'>
-          <h2>{oneComment.rareuser.user.username}</h2>
-          <p>{oneComment.date}</p>
-          <h4>{oneComment.comment}</h4>
+       <Card className="root" variant="outlined" maxWidth>
+        <CardContent>
+          <Typography className="title" color="textSecondary" gutterBottom>
+          {oneComment.rareuser.user.username}
+          </Typography>
+          <Typography variant="h5" component="h2">
+          {oneComment.comment}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+          {oneComment.date}
+          </Typography>
           <button className='btn-danger' onClick={destroyComment}>Delete Comment</button>
           <button className='btn-warning' onClick={updateComment}>Update Comment</button>
 
-      </div>
+        </CardContent>
+       </Card>
     );
   }
 }
