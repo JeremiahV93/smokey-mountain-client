@@ -13,15 +13,15 @@ class Editmodal extends React.Component {
     this.setState({ showHide: !this.state.showHide });
   }
 
-  closeModal = (e) => {
-    const { deleteTag } = this.props;
-    this.handleModalShowHide();
-    deleteTag(e);
-  }
-
   tagUpdate = (e) => {
     e.preventDefault();
     this.setState({ label: e.target.value });
+  }
+
+  closeModal = (e) => {
+    const { updateTag } = this.props;
+    this.handleModalShowHide();
+    updateTag(e);
   }
 
   submitTag = (e) => {
@@ -33,9 +33,10 @@ class Editmodal extends React.Component {
     tagData.updateTag(tagId, jsonTag)
       .then(() => {
         this.setState({ isOpen: false, label: '' });
-        this.getTagData();
+        tagData.getAllTags();
       })
       .catch((err) => console.error(err));
+    this.handleModalShowHide();
   }
 
   render() {
