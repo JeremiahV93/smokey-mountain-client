@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-class BootstrapModal extends React.Component {
+class Trashmodal extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -46,4 +46,4 @@ class BootstrapModal extends React.Component {
   }
 }
 
-export default BootstrapModal;
+export default Trashmodal;
